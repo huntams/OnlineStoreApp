@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OnlineStoreApp</string>
+    <string name="home">Home</string>
+    <string name="catalog">Catalog</string>
+    <string name="shop">Shop</string>
+    <string name="discount">Discounts</string>
+    <string name="profile">Profile</string>
+</resources>
