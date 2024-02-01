@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollapsedText">
+        <attr name="text" format="string"/>
+        <attr name="collapsed" format="boolean"/>
+    </declare-styleable>
+    <array name="filters">
+        <item name="@string/by_popularity"/>
+        <item name="@string/by_price"/>
+        <item name="@string/ascending_price"/>
+    </array>
+</resources>

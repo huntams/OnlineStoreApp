@@ -7,7 +7,7 @@
     <item
         android:id="@+id/Catalog"
         android:icon="@drawable/ic_catalog_24"
-        android:title="@string/profile"/>
+        android:title="@string/catalog"/>
     <item
         android:id="@+id/Shop"
         android:icon="@drawable/ic_bag_24"
