@@ -3,28 +3,33 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.Material3.CardView.Outlined"
+    style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="7dp"
-    app:cardCornerRadius="8dp"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-        <ImageView
-            android:id="@+id/imageViewProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewImages"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars"
-            android:importantForAccessibility="no" />
+            tools:itemCount="4"
+            tools:listitem="@layout/item_image" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonLiked"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,12 +44,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:textStyle="bold"
             android:paddingTop="2dp"
-            tools:text="test"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewImages"
+            tools:text="test" />
 
         <TextView
             android:id="@+id/textViewPriceWithDiscount"
@@ -52,10 +57,10 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
-            tools:text="test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPrice" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewPrice"
+            tools:text="test" />
 
         <TextView
             android:id="@+id/textViewTitle"
@@ -63,10 +68,10 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
-            tools:text="test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPriceWithDiscount" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewPriceWithDiscount"
+            tools:text="test" />
 
         <TextView
             android:id="@+id/textViewSubtitle"
@@ -74,19 +79,19 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
-            tools:text="test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+            tools:text="test" />
 
-        <com.google.android.material.button.MaterialButton
+        <com.example.onlinestoreapp.presentation.customViews.ProductRatingView
             android:id="@+id/stars"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

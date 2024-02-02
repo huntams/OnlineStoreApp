@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlinestoreapp.data.model.Items
 import com.example.onlinestoreapp.data.remote.model.ApiProduct
+import com.example.onlinestoreapp.domain.db.AddProductDBUseCase
 import com.example.onlinestoreapp.domain.FilterChipUseCase
 import com.example.onlinestoreapp.domain.GetCatalogUseCase
+import com.example.onlinestoreapp.domain.WordDeclensionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +19,8 @@ import javax.inject.Inject
 class CatalogViewModel @Inject constructor(
     private val getCatalogUseCase: GetCatalogUseCase,
     private val filterChipUseCase: FilterChipUseCase,
+    private val addProductDBUseCase: AddProductDBUseCase,
+    private val wordDeclensionUseCase: WordDeclensionUseCase
 ) : ViewModel() {
     private val _catalogLiveData = MutableLiveData<Items>()
     val catalogLiveData: LiveData<Items> = _catalogLiveData
@@ -25,13 +30,21 @@ class CatalogViewModel @Inject constructor(
     init {
         getCatalog()
     }
-    fun filterData(listData: List<ApiProduct>,filterData: String){
-        viewModelScope.launch {
-            _filterLiveData.postValue(filterChipUseCase(listData,filterData))
+
+    fun wordDeclension(num: Int,data: Array<String>): String{
+        return wordDeclensionUseCase(num,data)
+    }
+    fun addProduct(product:ApiProduct){
+        viewModelScope.launch(Dispatchers.IO) {
+            addProductDBUseCase(product)
         }
     }
+    fun filterData(listData: List<ApiProduct>,filterData: String): List<ApiProduct>{
+            return filterChipUseCase(listData,filterData)
+
+    }
     private fun getCatalog(){
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO)  {
             getCatalogUseCase().also {
                 _catalogLiveData.postValue(it)
             }

@@ -31,4 +31,11 @@
     <string name="by_popularity">By popularity</string>
     <string name="by_price">By price reduction</string>
     <string name="ascending_price">Ascending price</string>
+    <string name="thing">thing</string>
+    <string name="things">things</string>
+    <string name="thingses">things</string>
+    <string name="review">review</string>
+    <string name="reviews">reviews</string>
+    <string name="reviewes">review</string>
+    <string name="text_stars">%1$s · %2$s</string>
 </resources>

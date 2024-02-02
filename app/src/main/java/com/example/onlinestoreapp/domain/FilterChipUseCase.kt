@@ -5,9 +5,9 @@ import javax.inject.Inject
 
 class FilterChipUseCase @Inject constructor(
 ) {
-    suspend operator fun invoke(listData: List<ApiProduct>, filterData: String) : List<ApiProduct> {
+    operator fun invoke(listData: List<ApiProduct>, filterData: String) : List<ApiProduct> {
         return listData.filter {
             it.tags.contains(filterData)
-        }?: listOf()
+        }
     }
 }

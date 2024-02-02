@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -17,6 +16,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.databinding.CollapsedTextBinding
 import com.example.onlinestoreapp.databinding.FragmentProductPageBinding
+import com.example.onlinestoreapp.domain.ImagesUseCase
+import com.example.onlinestoreapp.presentation.ImagePagerAdapter
+import com.google.android.material.carousel.CarouselLayoutManager
+import com.google.android.material.carousel.CarouselSnapHelper
+import com.google.android.material.carousel.FullScreenCarouselStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,8 +31,16 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
     private val binding by viewBinding(FragmentProductPageBinding::bind)
     private val viewModel by viewModels<CatalogViewModel>()
     private val args: ProductFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var imagesUseCase: ImagesUseCase
+
+    @Inject
+    lateinit var imagePagerAdapter: ImagePagerAdapter
+
     @Inject
     lateinit var characteristicsAdapter: CharacteristicsAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -36,19 +48,38 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
         with(binding) {
             viewModel.catalogLiveData.observe(viewLifecycleOwner) {
 
-                val data = it.items.first{product->
+                val data = it.items.first { product ->
                     product.id == args.productIndex
                 }
-
+                recyclerViewImages.layoutManager = CarouselLayoutManager(
+                    FullScreenCarouselStrategy()
+                )
+                stars.rating = data.feedback.rating
+                val snapHelper = CarouselSnapHelper()
+                snapHelper.attachToRecyclerView(recyclerViewImages)
+                imagePagerAdapter.submitList(imagesUseCase(data.id))
+                recyclerViewImages.adapter = imagePagerAdapter
                 characteristicsAdapter.submitList(data.info)
+
                 recyclerViewCharacteristics.adapter = characteristicsAdapter
-                imageViewProduct.setImageDrawable( R.drawable.ic_bag_24.toDrawable())
+                textviewStars.text = getString(
+                    R.string.text_stars,
+                    data.feedback.rating.toString(),
+                    "${data.feedback.count} ${
+                        viewModel.wordDeclension(
+                            data.feedback.count,
+                            resources.getStringArray(R.array.review)
+                        )
+                    }"
+                )
                 textDescription.textviewDescription.text = data.description
                 textViewTitle.text = data.title
                 textViewSubtitle.text = data.subtitle
                 buttonBrand.text = data.title
                 textviewTotal.text = data.available.toString()
                 textComposition.textviewDescription.text = data.ingredients
+
+                imagePagerAdapter.submitList(imagesUseCase(data.id))
             }
             textDescription.buttonHide.setOnClickListener {
                 hideText(textDescription)
@@ -75,11 +106,12 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-    private fun hideText(collapsedText: CollapsedTextBinding){
-        if(collapsedText.buttonHide.text==getString(R.string.hide)){
+
+    private fun hideText(collapsedText: CollapsedTextBinding) {
+        if (collapsedText.buttonHide.text == getString(R.string.hide)) {
             collapsedText.buttonHide.text = getString(R.string.more)
             collapsedText.textviewDescription.maxLines = 2
-        }else{
+        } else {
             collapsedText.buttonHide.text = getString(R.string.hide)
             collapsedText.textviewDescription.maxLines = Int.MAX_VALUE
         }

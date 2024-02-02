@@ -17,21 +17,25 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageViewProduct"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewImages"
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                tools:itemCount="4"
+                tools:listitem="@layout/item_image" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonLiked"
-                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.Material3.Button.IconButton.Filled"
                 app:icon="@drawable/ic_heart_selector"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,44 +46,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_info_24"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewProduct"
+                app:layout_constraintBottom_toBottomOf="@+id/recyclerViewImages"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="0dp"
 
-                android:textStyle="normal"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
-                tools:text="@string/shop"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewProduct" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewImages"
+                tools:text="@string/shop" />
 
             <TextView
                 android:id="@+id/textViewSubtitle"
                 android:layout_width="0dp"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
-                tools:text="@string/shop"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                tools:text="@string/shop" />
 
             <TextView
                 android:id="@+id/textviewTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 android:paddingTop="10dp"
-                tools:text="@string/shop"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle"
+                tools:text="@string/shop" />
+
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
@@ -90,25 +95,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textviewTotal" />
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/stars"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="10dp"
+                android:numStars="5"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"/>
+            <TextView
+                android:id="@+id/textviewStars"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="4dp"
+                android:gravity="start"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
+                app:layout_constraintStart_toEndOf="@+id/stars"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                tools:text="@string/text_stars" />
             <TextView
                 android:id="@+id/textviewZaglushka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                tools:text="@string/shop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stars" />
+                app:layout_constraintTop_toBottomOf="@+id/stars"
+                tools:text="@string/shop" />
 
             <TextView
                 android:id="@+id/textviewHeaderDescription"
@@ -116,23 +132,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="start"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:text="@string/description"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textviewZaglushka" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonBrand"
-                style="@style/ButtonChanged"
+                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                tools:text="@string/shop"
+                android:gravity="start"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_right_arrow_24"
+                app:iconGravity="end"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textviewHeaderDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/textviewHeaderDescription"
+                tools:text="@string/shop" />
 
 
             <include
@@ -150,9 +170,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="34dp"
                 android:gravity="start"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
                 android:text="@string/characteristics"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textDescription" />
@@ -160,13 +180,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewCharacteristics"
                 android:layout_width="match_parent"
-                tools:listitem="@layout/item_characteristics"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textviewHeaderCharacteristics" />
+                app:layout_constraintTop_toBottomOf="@+id/textviewHeaderCharacteristics"
+                tools:listitem="@layout/item_characteristics" />
+
             <TextView
                 android:id="@+id/textviewHeaderComposition"
                 android:layout_width="0dp"
@@ -177,12 +198,13 @@
                 app:layout_constraintEnd_toEndOf="@+id/buttonCopy"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewCharacteristics" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonCopy"
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="32dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 app:icon="@drawable/ic_copy_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewCharacteristics" />
@@ -191,8 +213,8 @@
                 android:id="@+id/textComposition"
                 layout="@layout/collapsed_text"
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textviewHeaderComposition" />
@@ -206,8 +228,8 @@
         android:id="@+id/buttonOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
         android:layout_gravity="bottom"
-        app:cornerRadius="8dp"
-        android:text="@string/add_to_cart" />
+        android:text="@string/add_to_cart"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        app:cornerRadius="8dp" />
 </FrameLayout>

@@ -14,8 +14,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInputLayout"
-            style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
+            style="?attr/textInputFilledStyle"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:endIconDrawable="@drawable/ic_close_28"
@@ -27,8 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="name"
-                android:hint="@string/name"
-                app:backgroundTint="@color/black" />
+                android:imeOptions="actionNext"
+                android:nextFocusDown="@+id/surnameTextInputEditText"
+                android:hint="@string/name" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
+
             app:endIconDrawable="@drawable/ic_close_28"
             app:errorEnabled="true"
             app:errorIconDrawable="@null">
@@ -48,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="username"
+                android:nextFocusDown="@+id/phoneTextInputLayout"
                 android:hint="@string/surname"
                 app:endIconMode="clear_text" />
 
@@ -69,8 +72,9 @@
                 style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="username"
+                android:autofillHints="phone"
                 android:digits="0123456789"
+                android:imeOptions="actionDone"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:maxLength="10" />
@@ -79,7 +83,6 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonEnter"
-            style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -93,6 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
+
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/accept_terms"

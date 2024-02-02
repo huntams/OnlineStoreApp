@@ -26,6 +26,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
     @Inject
     lateinit var catalogAdapter: CatalogAdapter
 
+
     private val viewModel by viewModels<CatalogViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,25 +36,32 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             viewModel.catalogLiveData.observe(viewLifecycleOwner) { items ->
                 group.chipGroupFilter.setOnCheckedStateChangeListener { _, checkedId ->
                     if (checkedId.isNotEmpty()) {
-                        val titleOrNull = group.chipGroupFilter.findViewById<Chip>(checkedId[0])?.text
-                        viewModel.filterData(items.items,titleOrNull.toString())
+                        val titleOrNull =
+                            group.chipGroupFilter.findViewById<Chip>(checkedId[0])?.text
+                        viewModel.filterData(items.items, titleOrNull.toString())
                         Toast.makeText(requireContext(), titleOrNull, Toast.LENGTH_LONG).show()
                     } else group.chipGroupFilter.check(group.chipGroupFilter.children.toList()[0].id)
                 }
-                viewModel.filterLiveData.observe(viewLifecycleOwner){
+                viewModel.filterLiveData.observe(viewLifecycleOwner) {
                     catalogAdapter.submitList(it)
                 }
-                catalogAdapter.submitList(items.items)
-                catalogAdapter.setCallback {
-                    findNavController().navigate(
-                        CatalogFragmentDirections.actionCatalogToProductFragment(
-                            it.id
+                catalogAdapter.apply {
+                    submitList(items.items)
+                    setCallback {
+                        findNavController().navigate(
+                            CatalogFragmentDirections.actionCatalogToProductFragment(
+                                it.id
+                            )
                         )
-                    )
+                    }
+                    setLike {
+                        viewModel.addProduct(it)
+                    }
                 }
+
                 recyclerViewCatalog.apply {
                     adapter = catalogAdapter
-                    layoutManager = StaggeredGridLayoutManager(2,RecyclerView.VERTICAL)
+                    layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
                 }
             }
         }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
@@ -17,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private val binding by viewBinding(FragmentRegistrationBinding::bind)
+    private val viewModel by viewModels<RegistrationViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
@@ -32,6 +34,12 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 buttonEnable()
             }
             buttonEnter.setOnClickListener {
+                viewModel.addUser(
+                    nameTextInputEditText.text.toString(),
+                    surnameTextInputEditText.text.toString(),
+                    "7${phoneTextInputEditText.text.toString()}".toLong()
+
+                )
                 findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCatalog2())
             }
         }

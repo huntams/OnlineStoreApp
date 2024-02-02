@@ -32,4 +32,11 @@
     <string name="by_popularity">По популярности</string>
     <string name="by_price">По уменьшению цены</string>
     <string name="ascending_price">По возрастанию цены</string>
+    <string name="thing">штука</string>
+    <string name="things">штуки</string>
+    <string name="thingses">штуки</string>
+    <string name="review">отзыв</string>
+    <string name="reviews">отзыва</string>
+    <string name="reviewes">отзывов</string>
+    <string name="text_stars">%1$s · %2$s</string>
 </resources>
