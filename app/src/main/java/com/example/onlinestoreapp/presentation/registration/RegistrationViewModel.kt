@@ -13,7 +13,7 @@ class RegistrationViewModel @Inject constructor(
     private val addUserDBUseCase: AddUserDBUseCase
 ) : ViewModel() {
 
-    fun addUser(name: String, surname: String, phone: Long) {
+    fun addUser(name: String, surname: String, phone: String) {
         viewModelScope.launch(Dispatchers.IO) {
             addUserDBUseCase(name, surname, phone)
         }

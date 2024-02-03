@@ -15,64 +15,58 @@
         android:drawableLeft="@drawable/ic_profile_24"
         android:drawableRight="@drawable/ic_logout_32"
         android:gravity="center_vertical"
-        android:text="Apewtio"
-        app:cornerRadius="8dp" />
+        android:text="Apewtio"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonFav"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:drawableLeft="@drawable/ic_heart_default_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="Favourite"
-        app:cornerRadius="8dp" />
+        android:text="Favourite"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonShop"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_shops_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="Apewtio"
-        app:cornerRadius="8dp" />
+        android:text="Apewtio"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonQuestions"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_feedback_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="Apewtio"
-        app:cornerRadius="8dp" />
+        android:text="Apewtio"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonOffer"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_offer_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="Apewtio"
-        app:cornerRadius="8dp" />
+        android:text="Apewtio"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonReturn"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_weight="0"
         android:drawableLeft="@drawable/ic_refund_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="Apewtio"
-        app:cornerRadius="8dp" />
+        android:text="Apewtio" />
 
     <Space
         android:layout_width="match_parent"
@@ -81,12 +75,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonExit"
-        style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+        style="@style/buttonProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="8dp"
         android:layout_weight="0"
+        android:layout_marginBottom="32dp"
         android:text="Exit"
         app:cornerRadius="8dp" />
 

@@ -14,6 +14,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StoreDAO {
 
+
+    @Query("SELECT * FROM users")
+    fun getUser(): Flow<List<UserEntity>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addProduct(product: ProductEntity)
     @Insert(onConflict = OnConflictStrategy.REPLACE)

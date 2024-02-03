@@ -34,9 +34,13 @@
     <string name="ascending_price">По возрастанию цены</string>
     <string name="thing">штука</string>
     <string name="things">штуки</string>
-    <string name="thingses">штуки</string>
+    <string name="thingses">штук</string>
     <string name="review">отзыв</string>
     <string name="reviews">отзыва</string>
     <string name="reviewes">отзывов</string>
     <string name="text_stars">%1$s · %2$s</string>
+    <string name="line">" Not crossed <strike> crossed </strike> "</string>
+    <string name="counter">(%d)</string>
+    <string name="discount_procent">-%d%%</string>
+    <string name="available_for_order">Доступно для заказа %1$d %2$s</string>
 </resources>

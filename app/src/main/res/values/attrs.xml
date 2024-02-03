@@ -17,6 +17,6 @@
     <string-array name="review">
         <item name="@string/review"/>
         <item name="@string/reviews"/>
-        <item name="@string/reviewses"/>
+        <item name="@string/reviewes"/>
     </string-array>
 </resources>

@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
+import com.example.onlinestoreapp.base.PhoneTextWatcher
 import com.example.onlinestoreapp.databinding.FragmentRegistrationBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -30,6 +31,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 errorHandle(surnameTextInputEditText, surnameTextInputLayout)
                 buttonEnable()
             }
+            phoneTextInputEditText.addTextChangedListener(PhoneTextWatcher(phoneTextInputEditText))
             phoneTextInputEditText.addTextChangedListener {
                 buttonEnable()
             }
@@ -37,10 +39,10 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
                 viewModel.addUser(
                     nameTextInputEditText.text.toString(),
                     surnameTextInputEditText.text.toString(),
-                    "7${phoneTextInputEditText.text.toString()}".toLong()
+                    "+7 ${phoneTextInputEditText.text.toString()}"
 
                 )
-                findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCatalog2())
+                findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHome())
             }
         }
     }
@@ -48,9 +50,9 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     private fun buttonEnable() {
         with(binding) {
             buttonEnter.isEnabled =
-                ((nameTextInputLayout.error.isNullOrEmpty() && nameTextInputEditText.text?.isEmpty() == false) &&
-                        (surnameTextInputLayout.error.isNullOrEmpty() && surnameTextInputEditText.text?.isEmpty() == false)
-                        && phoneTextInputEditText.length() == 10)
+                ((nameTextInputLayout.error.isNullOrEmpty() && nameTextInputEditText.text?.isNotEmpty() == true) &&
+                        (surnameTextInputLayout.error.isNullOrEmpty() && surnameTextInputEditText.text?.isNotEmpty() == true)
+                        && phoneTextInputEditText.text?.length == 13)
         }
 
     }

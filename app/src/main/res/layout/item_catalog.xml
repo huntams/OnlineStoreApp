@@ -6,6 +6,7 @@
     style="@style/Widget.Material3.CardView.Elevated"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/light_gray"
     android:layout_margin="7dp"
     app:cardCornerRadius="8dp">
 
@@ -17,7 +18,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewImages"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="144dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -33,9 +34,8 @@
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
             app:icon="@drawable/ic_heart_selector"
+            app:iconSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,29 +45,40 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
-            android:textStyle="bold"
+            android:textColor="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewImages"
-            tools:text="test" />
+            tools:text="line" />
 
         <TextView
             android:id="@+id/textViewPriceWithDiscount"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPrice"
             tools:text="test" />
 
+        <include
+            android:id="@+id/cardPrice"
+            android:paddingTop="2dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/textViewPriceWithDiscount"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPrice"
+            layout="@layout/card_price"/>
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
+            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewPriceWithDiscount"
@@ -79,6 +90,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingTop="2dp"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
@@ -92,14 +104,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/catalog"
-            android:src="@drawable/ic_plus_24"
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            style="@style/Widget.Material3.Button.IconButton.Filled"
+            app:icon="@drawable/ic_plus_24"
+            app:iconSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stars"
             app:shapeAppearance="@style/ShapeAppearanceFAB" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

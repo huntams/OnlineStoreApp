@@ -1,10 +1,14 @@
 package com.example.onlinestoreapp.presentation.catalog
 
+
+import android.content.res.Resources
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.data.remote.model.ApiProduct
 import com.example.onlinestoreapp.databinding.ItemCatalogBinding
 import com.example.onlinestoreapp.domain.ImagesUseCase
@@ -15,7 +19,8 @@ import com.google.android.material.carousel.FullScreenCarouselStrategy
 import javax.inject.Inject
 
 class CatalogAdapter @Inject constructor(
-    private val imagesUseCase: ImagesUseCase
+    private val imagesUseCase: ImagesUseCase,
+    private val resources: Resources
 ) : ListAdapter<ApiProduct, CatalogAdapter.ViewHolder>(
     diffUtilCallback
 ) {
@@ -53,11 +58,13 @@ class CatalogAdapter @Inject constructor(
                 val imagePagerAdapter = ImagePagerAdapter()
                 imagePagerAdapter.submitList(imagesUseCase(item.id))
                 recyclerViewImages.adapter = imagePagerAdapter
-                textViewPrice.text = item.price.price
+                textViewPrice.text = "${item.price.price} ${item.price.unit}"
+                textViewPrice.paintFlags = textViewPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 textViewTitle.text = item.title
                 textViewSubtitle.text = item.subtitle
                 stars.setRating(item.feedback.rating, item.feedback.count)
-                textViewPriceWithDiscount.text = item.price.priceWithDiscount
+                cardPrice.textViewDiscount.text = resources.getString(R.string.discount_procent,item.price.discount)
+                textViewPriceWithDiscount.text = "${item.price.priceWithDiscount} ${item.price.unit}"
                 imagePagerAdapter.setCallback {
                     onClick(item)
                 }

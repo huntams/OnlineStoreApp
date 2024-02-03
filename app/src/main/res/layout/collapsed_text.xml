@@ -14,6 +14,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonHide"
+        android:textColor="@color/grey"
         style="@style/Widget.Material3.Button.IconButton"
         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:layout_width="wrap_content"

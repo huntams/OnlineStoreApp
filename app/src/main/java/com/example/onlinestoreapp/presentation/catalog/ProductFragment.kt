@@ -1,5 +1,6 @@
 package com.example.onlinestoreapp.presentation.catalog
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -60,7 +61,6 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                 imagePagerAdapter.submitList(imagesUseCase(data.id))
                 recyclerViewImages.adapter = imagePagerAdapter
                 characteristicsAdapter.submitList(data.info)
-
                 recyclerViewCharacteristics.adapter = characteristicsAdapter
                 textviewStars.text = getString(
                     R.string.text_stars,
@@ -68,16 +68,23 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                     "${data.feedback.count} ${
                         viewModel.wordDeclension(
                             data.feedback.count,
-                            resources.getStringArray(R.array.review)
+                            getString(R.string.review)
                         )
                     }"
                 )
                 textDescription.textviewDescription.text = data.description
                 textViewTitle.text = data.title
+                textViewOldPrice.paintFlags = textViewTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 textViewSubtitle.text = data.subtitle
                 buttonBrand.text = data.title
-                textviewTotal.text = data.available.toString()
+                textviewTotal.text = getString(R.string.available_for_order, data.available,viewModel.wordDeclension(
+                    data.available,
+                    getString( R.string.thing)
+                ))
                 textComposition.textviewDescription.text = data.ingredients
+                textViewOldPrice.text = "${data.price.price} ${data.price.unit}"
+                textviewPrice.text ="${data.price.priceWithDiscount} ${data.price.unit}"
+                cardPrice.textViewDiscount.text = getString(R.string.discount_procent,data.price.discount)
 
                 imagePagerAdapter.submitList(imagesUseCase(data.id))
             }

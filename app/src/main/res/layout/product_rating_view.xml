@@ -17,12 +17,16 @@
         android:id="@+id/textViewRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:textColor="@color/orange"
+        android:textStyle="normal"
+        android:text="@string/shop"
+        style="@style/TextAppearance.Material3.BodySmall"/>
     <TextView
         android:id="@+id/textViewCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+        android:layout_marginStart="2dp"
+        android:textColor="@color/grey"
+        android:text="@string/counter"
+        style="@style/TextAppearance.Material3.BodySmall" />
 </LinearLayout>

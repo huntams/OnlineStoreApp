@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.databinding.ProductRatingViewBinding
 
 class ProductRatingView @JvmOverloads constructor(
@@ -25,7 +26,7 @@ class ProductRatingView @JvmOverloads constructor(
 
     fun setRating(rating: Float, count: Int) {
         binding.textViewRating.text = rating.toString()
-        binding.textViewCounter.text = count.toString()
+        binding.textViewCounter.text = resources.getString(R.string.counter,count)
         setStarIcon(rating)
     }
 

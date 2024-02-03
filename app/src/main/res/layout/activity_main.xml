@@ -37,6 +37,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
+        android:background="@color/md_theme_light_background"
+        style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
         app:layout_constraintStart_toStartOf="parent"

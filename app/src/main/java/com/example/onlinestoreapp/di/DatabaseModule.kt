@@ -1,6 +1,7 @@
 package com.example.onlinestoreapp.di
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.room.Room
 import com.example.onlinestoreapp.data.db.StoreDAO
 import com.example.onlinestoreapp.data.db.StoreDB
@@ -30,7 +31,13 @@ object DatabaseModule {
         ).fallbackToDestructiveMigration()
             .build()
     }
-
+    @Provides
+    @Singleton
+    fun provideResources(
+        @ApplicationContext context: Context
+    ): Resources {
+        return context.resources
+    }
     @Provides
     @Singleton
     fun provideStoreDAO(db: StoreDB): StoreDAO {

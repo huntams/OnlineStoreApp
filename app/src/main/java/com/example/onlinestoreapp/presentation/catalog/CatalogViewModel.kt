@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlinestoreapp.data.model.Items
 import com.example.onlinestoreapp.data.remote.model.ApiProduct
-import com.example.onlinestoreapp.domain.db.AddProductDBUseCase
 import com.example.onlinestoreapp.domain.FilterChipUseCase
 import com.example.onlinestoreapp.domain.GetCatalogUseCase
 import com.example.onlinestoreapp.domain.WordDeclensionUseCase
+import com.example.onlinestoreapp.domain.db.AddProductDBUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class CatalogViewModel @Inject constructor(
         getCatalog()
     }
 
-    fun wordDeclension(num: Int,data: Array<String>): String{
+    fun wordDeclension(num: Int, data: String): String{
         return wordDeclensionUseCase(num,data)
     }
     fun addProduct(product:ApiProduct){

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class AddUserDBUseCase @Inject constructor(
     private val storeDBRepository: StoreDBRepository
 ) {
-    suspend operator fun invoke(name: String, surname: String, phone: Long) {
+    suspend operator fun invoke(name: String, surname: String, phone: String) {
         storeDBRepository.addUser(name, surname, phone)
     }
 }

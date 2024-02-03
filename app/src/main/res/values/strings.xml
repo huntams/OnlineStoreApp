@@ -36,6 +36,10 @@
     <string name="thingses">things</string>
     <string name="review">review</string>
     <string name="reviews">reviews</string>
-    <string name="reviewes">review</string>
+    <string name="reviewes">reviews</string>
     <string name="text_stars">%1$s · %2$s</string>
+    <string name="counter">(%d)</string>
+    <string name="discount_procent">-%d%%</string>
+    <string name="line"> Not crossed <strike> crossed </strike> </string>
+    <string name="available_for_order">Available for order %1$d %2$s</string>
 </resources>

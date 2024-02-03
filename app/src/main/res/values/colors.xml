@@ -2,7 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_gray">#FFF8F8F8</color>
     <color name="seed">#D62F89</color>
+    <color name="light_pink">#FFFF8AC9</color>
+    <color name="orange">#FFF9A249</color>
+    <color name="grey">#FFA0A1A3</color>
+    <color name="dark_grey">#FF3E3E3E</color>
+    <color name="dark_blue">#FF52606D</color>
     <color name="md_theme_light_primary">#B60870</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FFD9E5</color>
@@ -19,7 +25,7 @@
     <color name="md_theme_light_errorContainer">#FFDAD6</color>
     <color name="md_theme_light_onError">#FFFFFF</color>
     <color name="md_theme_light_onErrorContainer">#410002</color>
-    <color name="md_theme_light_background">#F8FDFF</color>
+    <color name="md_theme_light_background">#FFFFFF</color>
     <color name="md_theme_light_onBackground">#001F25</color>
     <color name="md_theme_light_surface">#F8FDFF</color>
     <color name="md_theme_light_onSurface">#001F25</color>
