@@ -18,11 +18,18 @@ class WordDeclensionUseCase @Inject constructor(
         resources.getString(R.string.things),
         resources.getString(R.string.thingses)
     )
+    private val product = listOf(
+        resources.getString(R.string.product),
+        resources.getString(R.string.products),
+        resources.getString(R.string.productes)
+    )
 
     operator fun invoke(num: Int,  data: String): String {
 
         val list: List<String> = if (review.contains(data))
             review
+        else if(product.contains(data))
+            product
         else
             thing
         val number = (abs(num) % 100)

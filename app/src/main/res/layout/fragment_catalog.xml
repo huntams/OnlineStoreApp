@@ -6,21 +6,8 @@
     android:orientation="vertical"
     android:layout_marginHorizontal="16dp"
     android:layout_height="match_parent">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menu"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            app:simpleItems="@array/filters"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
+    <include layout="@layout/filter_tab"
+        android:id="@+id/filterTab"/>
 
     <HorizontalScrollView
         android:layout_width="match_parent"

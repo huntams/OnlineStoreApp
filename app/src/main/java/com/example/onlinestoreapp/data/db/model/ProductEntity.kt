@@ -35,4 +35,6 @@ data class ProductEntity(
     val description: String,
     @ColumnInfo(name = "ingredients")
     val ingredients: String,
+    @ColumnInfo(name = "like")
+    val like: Boolean=true,
 )

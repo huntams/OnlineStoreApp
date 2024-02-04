@@ -25,4 +25,5 @@ data class ApiProduct(
     val info : List<ApiInfo>,
     @SerialName("ingredients")
     val ingredients: String,
+    var like: Boolean=false,
 )

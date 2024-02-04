@@ -8,6 +8,8 @@ interface StoreDBRepository {
     suspend fun addProduct(product: ApiProduct)
     fun getProducts(): Flow<List<ApiProduct>>
 
+    suspend fun deleteProduct(product: ApiProduct)
+    suspend fun likeProduct(product:ApiProduct)
     fun getUser(): Flow<User?>
     suspend fun addUser(name: String, surname: String, phone:String)
 }

@@ -5,17 +5,17 @@ import android.content.res.Resources
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.data.remote.model.ApiProduct
 import com.example.onlinestoreapp.databinding.ItemCatalogBinding
 import com.example.onlinestoreapp.domain.ImagesUseCase
 import com.example.onlinestoreapp.presentation.ImagePagerAdapter
-import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.CarouselSnapHelper
-import com.google.android.material.carousel.FullScreenCarouselStrategy
 import javax.inject.Inject
 
 class CatalogAdapter @Inject constructor(
@@ -48,20 +48,51 @@ class CatalogAdapter @Inject constructor(
     inner class ViewHolder(
         private val binding: ItemCatalogBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        private val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(8,0,8,0)
+        }
+
         fun bind(item: ApiProduct) {
             with(binding) {
-                recyclerViewImages.layoutManager = CarouselLayoutManager(
-                    FullScreenCarouselStrategy()
-                )
-                val snapHelper = CarouselSnapHelper()
-                snapHelper.attachToRecyclerView(recyclerViewImages)
-                val imagePagerAdapter = ImagePagerAdapter()
-                imagePagerAdapter.submitList(imagesUseCase(item.id))
-                recyclerViewImages.adapter = imagePagerAdapter
                 textViewPrice.text = "${item.price.price} ${item.price.unit}"
                 textViewPrice.paintFlags = textViewPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 textViewTitle.text = item.title
                 textViewSubtitle.text = item.subtitle
+                val imagePagerAdapter = ImagePagerAdapter()
+                val data =imagesUseCase(item.id)
+                imagePagerAdapter.submitList(data)
+                imageSlider.viewpager2.adapter = imagePagerAdapter
+                val dotsImage = Array(2) { ImageView(binding.root.context) }
+                dotsImage.forEach {
+                    it.setImageResource(
+                        R.drawable.ic_page_small_default_8
+                    )
+                    imageSlider.slideDotLL.addView(it,params)
+                }
+                dotsImage[0].setImageResource(R.drawable.ic_page_small_8)
+
+                val pageChangeListener = object : ViewPager2.OnPageChangeCallback(){
+                    override fun onPageSelected(position: Int) {
+                        dotsImage.mapIndexed { index, imageView ->
+                            if (position == index){
+                                imageView.setImageResource(
+                                    R.drawable.ic_page_small_8
+                                )
+                            }else{
+                                imageView.setImageResource(R.drawable.ic_page_small_default_8)
+                            }
+                        }
+                        super.onPageSelected(position)
+                    }
+                }
+                imageSlider.viewpager2.registerOnPageChangeCallback(pageChangeListener)
+                if(item.like)
+                    buttonLiked.setIconResource(R.drawable.ic_heart_active_24)
+                else
+                    buttonLiked.setIconResource(R.drawable.ic_heart_default_24)
                 stars.setRating(item.feedback.rating, item.feedback.count)
                 cardPrice.textViewDiscount.text = resources.getString(R.string.discount_procent,item.price.discount)
                 textViewPriceWithDiscount.text = "${item.price.priceWithDiscount} ${item.price.unit}"
@@ -74,6 +105,7 @@ class CatalogAdapter @Inject constructor(
                 root.setOnClickListener {
                     onClick(item)
                 }
+
             }
         }
     }

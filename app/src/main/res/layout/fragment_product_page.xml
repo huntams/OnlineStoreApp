@@ -17,26 +17,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewImages"
+
+            <include android:id="@+id/imageSlider"
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_image" />
-
+                layout="@layout/image_slider"/>
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonLiked"
+                style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.Material3.Button.IconButton.Filled"
-                app:icon="@drawable/ic_heart_selector"
+                app:icon="@drawable/ic_heart_default_24"
+                app:iconSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +43,7 @@
                 app:iconTint="@null"
                 app:iconSize="24dp"
                 app:icon="@drawable/ic_info_24"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerViewImages"
+                app:layout_constraintBottom_toBottomOf="@+id/imageSlider"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -60,7 +55,7 @@
                 android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewImages"
+                app:layout_constraintTop_toBottomOf="@+id/imageSlider"
                 tools:text="@string/shop" />
 
             <TextView
@@ -102,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
+                android:progressTint="@color/orange"
                 android:numStars="5"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +119,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stars"
                 tools:text="@string/shop" />
@@ -131,13 +129,17 @@
                 android:layout_width="wrap_content"
                 android:textColor="@color/grey"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="11dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                 app:layout_constraintStart_toEndOf="@+id/textviewPrice"
                 app:layout_constraintTop_toBottomOf="@+id/stars"/>
 
             <include
                 android:id="@+id/cardPrice"
-                android:paddingTop="16dp"
+                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
+                android:layout_marginStart="11dp"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/textViewOldPrice"
@@ -244,12 +246,9 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonOrder"
+    <com.example.onlinestoreapp.presentation.customViews.ButtonWithPrice
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="@string/add_to_cart"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        app:cornerRadius="8dp" />
+        android:id="@+id/buttonPrice"
+        android:layout_gravity="bottom"/>
 </FrameLayout>

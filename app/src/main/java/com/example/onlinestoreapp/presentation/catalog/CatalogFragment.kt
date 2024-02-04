@@ -1,8 +1,10 @@
 package com.example.onlinestoreapp.presentation.catalog
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
+import com.example.onlinestoreapp.data.remote.model.ApiProduct
 import com.example.onlinestoreapp.databinding.FragmentCatalogBinding
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,13 +37,17 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             group.chipGroupFilter.check(group.chipGroupFilter.children.toList()[0].id)
 
             viewModel.catalogLiveData.observe(viewLifecycleOwner) { items ->
+                var data = items.items
                 group.chipGroupFilter.setOnCheckedStateChangeListener { _, checkedId ->
                     if (checkedId.isNotEmpty()) {
                         val titleOrNull =
-                            group.chipGroupFilter.findViewById<Chip>(checkedId[0])?.text
-                        viewModel.filterData(items.items, titleOrNull.toString())
-                        Toast.makeText(requireContext(), titleOrNull, Toast.LENGTH_LONG).show()
+                            group.chipGroupFilter.findViewById<Chip>(checkedId[0])?.text.toString()
+                        data =viewModel.filterData(items.items, titleOrNull)
                     } else group.chipGroupFilter.check(group.chipGroupFilter.children.toList()[0].id)
+                    catalogAdapter.submitList(data)
+                }
+                filterTab.buttonMenu.setOnClickListener {
+                    showMenu(it, R.menu.filter_menu,data)
                 }
                 viewModel.filterLiveData.observe(viewLifecycleOwner) {
                     catalogAdapter.submitList(it)
@@ -55,10 +62,10 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                         )
                     }
                     setLike {
-                        viewModel.addProduct(it)
+                        viewModel.likeProduct(it)
+                        group.chipGroupFilter.check(group.chipGroupFilter.children.toList()[0].id)
                     }
                 }
-
                 recyclerViewCatalog.apply {
                     adapter = catalogAdapter
                     layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
@@ -66,6 +73,34 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             }
         }
     }
+    private fun showMenu(v: View, @MenuRes menuRes: Int,data : List<ApiProduct>) {
+        val popup = PopupMenu(requireContext(), v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
 
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.Popularity->{
+                    binding.filterTab.buttonMenu.text = getString(R.string.by_popularity)
+                    catalogAdapter.submitList(data.sortedByDescending {
+                        it.feedback.rating
+                    })
+                }
+                R.id.Price->{
+                    binding.filterTab.buttonMenu.text = getString(R.string.by_price)
+                    catalogAdapter.submitList(data.sortedByDescending {
+                        it.price.priceWithDiscount.toInt()
+                    })
+                }
+                R.id.Ascending->{
+                    binding.filterTab.buttonMenu.text = getString(R.string.by_ascending_price)
+                    catalogAdapter.submitList(data.sortedBy {
+                        it.price.priceWithDiscount.toInt()
+                    })
+                }
+            }
+            false
+        }
+        popup.show()
+    }
 
 }

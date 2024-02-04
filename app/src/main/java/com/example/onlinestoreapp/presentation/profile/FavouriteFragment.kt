@@ -40,7 +40,7 @@ class FavouriteFragment: Fragment(R.layout.fragment_favourite) {
                     )
                 }
                 setLike {
-                    viewModel.addProduct(it)
+                    viewModel.deleteProduct(it)
                 }
             }
             binding.recyclerViewCatalog.apply {
@@ -56,9 +56,7 @@ class FavouriteFragment: Fragment(R.layout.fragment_favourite) {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
                 return when (menuItem.itemId) {
-
                     else -> {
                         findNavController().popBackStack()
                     }

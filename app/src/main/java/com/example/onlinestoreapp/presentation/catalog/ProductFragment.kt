@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -13,53 +14,72 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
+import com.example.onlinestoreapp.base.ViewPagerCallback
 import com.example.onlinestoreapp.databinding.CollapsedTextBinding
 import com.example.onlinestoreapp.databinding.FragmentProductPageBinding
 import com.example.onlinestoreapp.domain.ImagesUseCase
 import com.example.onlinestoreapp.presentation.ImagePagerAdapter
-import com.google.android.material.carousel.CarouselLayoutManager
-import com.google.android.material.carousel.CarouselSnapHelper
-import com.google.android.material.carousel.FullScreenCarouselStrategy
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductFragment : Fragment(R.layout.fragment_product_page) {
 
-    val menuHost: MenuHost by lazy { requireActivity() }
+    private val menuHost: MenuHost by lazy { requireActivity() }
     private val binding by viewBinding(FragmentProductPageBinding::bind)
     private val viewModel by viewModels<CatalogViewModel>()
     private val args: ProductFragmentArgs by navArgs()
 
     @Inject
     lateinit var imagesUseCase: ImagesUseCase
-
     @Inject
     lateinit var imagePagerAdapter: ImagePagerAdapter
-
     @Inject
     lateinit var characteristicsAdapter: CharacteristicsAdapter
+    @Inject
+    lateinit var viewPagerCallback: ViewPagerCallback
 
+    private lateinit var pageChangeListener : ViewPager2.OnPageChangeCallback
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         with(binding) {
+            val dotsImage = Array(2) { ImageView(binding.root.context) }
+            dotsImage.forEach {
+                it.setImageResource(
+                    R.drawable.ic_page_big_default_10
+                )
+                imageSlider.slideDotLL.addView(it,viewPagerCallback.paramsDots())
+            }
+            dotsImage[0].setImageResource(R.drawable.ic_page_big_10)
+            pageChangeListener = object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    dotsImage.mapIndexed { index, imageView ->
+                        if (position == index){
+                            imageView.setImageResource(
+                                R.drawable.ic_page_big_10
+                            )
+                        }else{
+                            imageView.setImageResource(R.drawable.ic_page_big_default_10)
+                        }
+                    }
+                    super.onPageSelected(position)
+                }
+            }
             viewModel.catalogLiveData.observe(viewLifecycleOwner) {
 
                 val data = it.items.first { product ->
                     product.id == args.productIndex
                 }
-                recyclerViewImages.layoutManager = CarouselLayoutManager(
-                    FullScreenCarouselStrategy()
-                )
-                stars.rating = data.feedback.rating
-                val snapHelper = CarouselSnapHelper()
-                snapHelper.attachToRecyclerView(recyclerViewImages)
                 imagePagerAdapter.submitList(imagesUseCase(data.id))
-                recyclerViewImages.adapter = imagePagerAdapter
+                imageSlider.viewpager2.adapter = imagePagerAdapter
+                imageSlider.viewpager2.registerOnPageChangeCallback(pageChangeListener)
+                stars.rating = data.feedback.rating
+                imagePagerAdapter.submitList(imagesUseCase(data.id))
                 characteristicsAdapter.submitList(data.info)
                 recyclerViewCharacteristics.adapter = characteristicsAdapter
                 textviewStars.text = getString(
@@ -72,6 +92,14 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                         )
                     }"
                 )
+                if(data.like){
+                    buttonLiked.setIconResource(R.drawable.ic_heart_active_24)
+                }
+                else
+                    buttonLiked.setIconResource(R.drawable.ic_heart_default_24)
+                buttonLiked.setOnClickListener {
+                    viewModel.likeProduct(data)
+                }
                 textDescription.textviewDescription.text = data.description
                 textViewTitle.text = data.title
                 textViewOldPrice.paintFlags = textViewTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -85,7 +113,8 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                 textViewOldPrice.text = "${data.price.price} ${data.price.unit}"
                 textviewPrice.text ="${data.price.priceWithDiscount} ${data.price.unit}"
                 cardPrice.textViewDiscount.text = getString(R.string.discount_procent,data.price.discount)
-
+                buttonPrice.setPrice("${data.price.price} ${data.price.unit}")
+                buttonPrice.setOldPrice("${data.price.priceWithDiscount} ${data.price.unit}")
                 imagePagerAdapter.submitList(imagesUseCase(data.id))
             }
             textDescription.buttonHide.setOnClickListener {
@@ -105,7 +134,6 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                     R.id.Share -> {
                         true
                     }
-
                     else -> {
                         findNavController().popBackStack()
                     }
@@ -113,7 +141,10 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.imageSlider.viewpager2.unregisterOnPageChangeCallback(pageChangeListener)
+    }
     private fun hideText(collapsedText: CollapsedTextBinding) {
         if (collapsedText.buttonHide.text == getString(R.string.hide)) {
             collapsedText.buttonHide.text = getString(R.string.more)

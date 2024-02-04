@@ -10,6 +10,8 @@ class StoreRepositoryImpl @Inject constructor(
     private val itemsMapper: ItemsMapper
 ) : StoreRepository  {
     override suspend fun getCatalog(): Items {
+
+
         return itemsMapper.apiToModel(storeApiService.getCatalog())
     }
 }

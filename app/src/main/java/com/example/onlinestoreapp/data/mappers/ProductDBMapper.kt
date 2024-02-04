@@ -1,5 +1,6 @@
 package com.example.onlinestoreapp.data.mappers
 
+import com.example.onlinestoreapp.data.db.model.InfoEntity
 import com.example.onlinestoreapp.data.db.model.ProductEntity
 import com.example.onlinestoreapp.data.db.model.ProductWithInfoEntity
 import com.example.onlinestoreapp.data.remote.model.ApiFeedback
@@ -10,31 +11,30 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProductMapper @Inject constructor() {
+class ProductDBMapper @Inject constructor() {
     fun fromEntityToUIModel(entity: ProductWithInfoEntity): ApiProduct {
-        with(entity) {
+        with(entity){
             return ApiProduct(
                 id = productEntity.id,
-                available = productEntity.available,
-                title = productEntity.title,
-                subtitle = productEntity.subtitle,
-                description = productEntity.description,
-                feedback = ApiFeedback(
-                    count = productEntity.count,
-                    rating = productEntity.rating
-                ),
-                info = info.map {
-                    ApiInfo(title = it.title, value = it.value)
-                },
-                ingredients = productEntity.ingredients,
-                price = ApiPrice(
-                    price = productEntity.price,
-                    discount = productEntity.discount,
-                    priceWithDiscount = productEntity.priceWithDiscount,
-                    unit = productEntity.unit
-                ),
-                tags = productEntity.tags,
-                like = productEntity.like,
+            available = productEntity.available,
+            title = productEntity.title,
+            subtitle = productEntity.subtitle,
+            description = productEntity.description,
+            feedback = ApiFeedback(
+                count = productEntity.count,
+                rating = productEntity.rating
+            ),
+            info = info.map {
+                ApiInfo(title = it.title, value = it.value)
+            },
+            ingredients = productEntity.ingredients,
+            price = ApiPrice(
+                price = productEntity.price,
+                discount = productEntity.discount,
+                priceWithDiscount = productEntity.priceWithDiscount,
+                unit = productEntity.unit
+            ),
+            tags = productEntity.tags
             )
 
         }
@@ -59,5 +59,11 @@ class ProductMapper @Inject constructor() {
             unit = product.price.unit,
             like = product.like
         )
+    }
+    fun fromInfoUIModelToEntity(product: ApiProduct):List<InfoEntity>{
+        return product.info.map{ InfoEntity(
+            productId = product.id, title = it.title, value = it.value
+        )
+        }
     }
 }

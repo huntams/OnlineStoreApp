@@ -2,7 +2,7 @@ package com.example.onlinestoreapp.data.db.repository
 
 import com.example.onlinestoreapp.data.db.StoreDAO
 import com.example.onlinestoreapp.data.db.model.UserEntity
-import com.example.onlinestoreapp.data.mappers.ProductMapper
+import com.example.onlinestoreapp.data.mappers.ProductDBMapper
 import com.example.onlinestoreapp.data.mappers.UserMapper
 import com.example.onlinestoreapp.data.model.User
 import com.example.onlinestoreapp.data.remote.model.ApiProduct
@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 class StoreDBRepositoryImpl @Inject constructor(
     private val storeDAO: StoreDAO,
-    private val productMapper: ProductMapper,
+    private val productDBMapper: ProductDBMapper,
     private val userMapper: UserMapper
 ) : StoreDBRepository {
     override suspend fun addProduct(product: ApiProduct) {
-        storeDAO.addProduct(productMapper.fromUIModelToEntity(product))
-        storeDAO.addAllInfo(productMapper.fromInfoUIModelToEntity(product))
+        storeDAO.addProduct(productDBMapper.fromUIModelToEntity(product))
+        storeDAO.addAllInfo(productDBMapper.fromInfoUIModelToEntity(product))
     }
 
     override fun getUser(): Flow<User?> {
@@ -36,8 +36,21 @@ class StoreDBRepositoryImpl @Inject constructor(
     override fun getProducts(): Flow<List<ApiProduct>> {
         return storeDAO.getProducts().map { list ->
             list.map {
-                productMapper.fromEntityToUIModel(it)
+                productDBMapper.fromEntityToUIModel(it)
             }
+        }
+    }
+
+    override suspend fun deleteProduct(product: ApiProduct) {
+        storeDAO.deleteProduct(productDBMapper.fromUIModelToEntity(product))
+    }
+
+    override suspend fun likeProduct(product: ApiProduct) {
+        try {
+            addProduct(product)
+        }
+        catch (_: Throwable){
+            deleteProduct(product)
         }
     }
 }

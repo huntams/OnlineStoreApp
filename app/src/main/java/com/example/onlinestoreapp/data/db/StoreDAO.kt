@@ -1,6 +1,7 @@
 package com.example.onlinestoreapp.data.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,9 +16,11 @@ import kotlinx.coroutines.flow.Flow
 interface StoreDAO {
 
 
+    @Delete
+    suspend fun deleteProduct(product: ProductEntity)
     @Query("SELECT * FROM users")
     fun getUser(): Flow<List<UserEntity>>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun addProduct(product: ProductEntity)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(userEntity: UserEntity)
