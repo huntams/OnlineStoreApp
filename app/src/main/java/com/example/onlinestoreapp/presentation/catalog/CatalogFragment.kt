@@ -42,12 +42,12 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
                     if (checkedId.isNotEmpty()) {
                         val titleOrNull =
                             group.chipGroupFilter.findViewById<Chip>(checkedId[0])?.text.toString()
-                        data =viewModel.filterData(items.items, titleOrNull)
+                        data = viewModel.filterData(items.items, titleOrNull)
                     } else group.chipGroupFilter.check(group.chipGroupFilter.children.toList()[0].id)
                     catalogAdapter.submitList(data)
                 }
                 filterTab.buttonMenu.setOnClickListener {
-                    showMenu(it, R.menu.filter_menu,data)
+                    showMenu(it, R.menu.filter_menu, data)
                 }
                 viewModel.filterLiveData.observe(viewLifecycleOwner) {
                     catalogAdapter.submitList(it)
@@ -73,25 +73,28 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             }
         }
     }
-    private fun showMenu(v: View, @MenuRes menuRes: Int,data : List<ApiProduct>) {
+
+    private fun showMenu(v: View, @MenuRes menuRes: Int, data: List<ApiProduct>) {
         val popup = PopupMenu(requireContext(), v)
         popup.menuInflater.inflate(menuRes, popup.menu)
 
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
-                R.id.Popularity->{
+                R.id.Popularity -> {
                     binding.filterTab.buttonMenu.text = getString(R.string.by_popularity)
                     catalogAdapter.submitList(data.sortedByDescending {
                         it.feedback.rating
                     })
                 }
-                R.id.Price->{
+
+                R.id.Price -> {
                     binding.filterTab.buttonMenu.text = getString(R.string.by_price)
                     catalogAdapter.submitList(data.sortedByDescending {
                         it.price.priceWithDiscount.toInt()
                     })
                 }
-                R.id.Ascending->{
+
+                R.id.Ascending -> {
                     binding.filterTab.buttonMenu.text = getString(R.string.by_ascending_price)
                     catalogAdapter.submitList(data.sortedBy {
                         it.price.priceWithDiscount.toInt()

@@ -9,7 +9,7 @@ data class UserEntity(
     @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "name")
-    val name:String,
+    val name: String,
     @ColumnInfo(name = "surname")
     val surname: String,
     @ColumnInfo(name = "phone")

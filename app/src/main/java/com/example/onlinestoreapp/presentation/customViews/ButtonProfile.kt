@@ -29,12 +29,13 @@ class ButtonProfile @JvmOverloads constructor(
             attrs,
             R.styleable.ProfileButton, defStyleAttr, 0
         ) {
-            val startImage = getDrawable(R.styleable.ProfileButton_startIconDrawable)?.let { image ->
-                binding.imageViewStart.setImageDrawable(image)
-            }
+            val startImage =
+                getDrawable(R.styleable.ProfileButton_startIconDrawable)?.let { image ->
+                    binding.imageViewStart.setImageDrawable(image)
+                }
             val endImage = getDrawable(R.styleable.ProfileButton_endIconDrawable)?.let { image ->
-            binding.imageViewEnd.setImageDrawable(image)
-        }
+                binding.imageViewEnd.setImageDrawable(image)
+            }
         }
     }
 
@@ -44,19 +45,19 @@ class ButtonProfile @JvmOverloads constructor(
         binding.textViewBottom.visibility = View.GONE
     }
 
-    fun setAllText(topText: String,bottomText: String) {
+    fun setAllText(topText: String, bottomText: String) {
         binding.textViewCenter.visibility = View.GONE
         binding.textViewBottom.text = bottomText
         binding.textViewTop.text = topText
     }
 
-    fun setStartImage(@DrawableRes imagesRes: Int){
+    fun setStartImage(@DrawableRes imagesRes: Int) {
         binding.imageViewStart.setImageDrawable(
             ContextCompat.getDrawable(context, imagesRes)
         )
     }
 
-    fun setEndImage(@DrawableRes imagesRes: Int){
+    fun setEndImage(@DrawableRes imagesRes: Int) {
         binding.imageViewEnd.setImageDrawable(
             ContextCompat.getDrawable(context, imagesRes)
         )

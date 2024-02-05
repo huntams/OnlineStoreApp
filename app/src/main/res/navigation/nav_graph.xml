@@ -33,7 +33,7 @@
             android:id="@+id/action_Profile_to_registrationFragment"
             app:destination="@id/registrationFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@+id/Profile"
+            app:popUpTo="@+id/Home"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -69,7 +69,6 @@
             android:id="@+id/action_registrationFragment_to_Home"
             app:destination="@id/Home"
             app:enterAnim="@android:anim/fade_out"
-            app:launchSingleTop="true"
             app:popUpTo="@id/registrationFragment"
             app:popUpToInclusive="true"/>
     </fragment>

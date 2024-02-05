@@ -33,6 +33,7 @@ class ProfileViewModel @Inject constructor(
     val deleteLiveData: LiveData<ResultLoader<Int>> = _deleteLiveData
     private val _userLiveData = MutableLiveData<User?>()
     val userLiveData: LiveData<User?> = _userLiveData
+
     init {
         getProducts()
     }
@@ -50,17 +51,19 @@ class ProfileViewModel @Inject constructor(
         }
 
     }
+
     fun wordDeclension(num: Int, data: String): String {
         return wordDeclensionUseCase(num, data)
     }
 
-    fun getUser(){
+    fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {
             getUserDBUseCase().collect {
                 _userLiveData.postValue(it)
             }
         }
     }
+
     private fun getProducts() {
         viewModelScope.launch {
             getProductsUseCase().collect { list ->

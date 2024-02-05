@@ -21,10 +21,11 @@ class MainViewModel @Inject constructor(
     init {
         getUser()
     }
-    private fun getUser(){
+
+    private fun getUser() {
         viewModelScope.launch(Dispatchers.IO) {
             getUserDBUseCase().collect {
-                    _userLiveData.postValue(it)
+                _userLiveData.postValue(it)
             }
         }
     }

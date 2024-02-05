@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .setPopUpTo(R.id.startFragment, true)
             .build()
 
-        viewModel.userLiveData.observe(this){hasUser->
-            if(hasUser ==null)
-                navController.navigate(R.id.registrationFragment,null,navOptions)
+        viewModel.userLiveData.observe(this) { hasUser ->
+            if (hasUser == null)
+                navController.navigate(R.id.registrationFragment, null, navOptions)
             else
-                navController.navigate(R.id.Home,null,navOptions)
+                navController.navigate(R.id.Home, null, navOptions)
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

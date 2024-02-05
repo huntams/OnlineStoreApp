@@ -38,7 +38,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.buttonFavourite.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.actionProfileToFavouriteFragment())
         }
-        binding.buttonProfile.setOnClickListener {
+        binding.buttonExit.setOnClickListener {
             viewModel.deleteDB()
         }
         viewModel.deleteLiveData.observe(viewLifecycleOwner) { result ->

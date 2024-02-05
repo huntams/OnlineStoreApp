@@ -39,7 +39,7 @@ class CatalogViewModel @Inject constructor(
 
     fun likeProduct(product: ApiProduct) {
         viewModelScope.launch(Dispatchers.IO) {
-            if(!product.like)
+            if (!product.like)
                 product.like = !product.like
 
             likeProductUseCase(product)
@@ -57,9 +57,9 @@ class CatalogViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             getCatalogUseCase().also { items ->
                 getProductsDBUseCase().collect { list ->
-                    list.forEach{product->
+                    list.forEach { product ->
                         items.items.map {
-                            if(it.id == product.id){
+                            if (it.id == product.id) {
                                 it.like = true
                             }
                         }

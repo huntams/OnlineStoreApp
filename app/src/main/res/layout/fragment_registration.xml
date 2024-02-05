@@ -14,11 +14,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInputLayout"
-            android:layout_width="match_parent"
             style="?attr/textInputFilledStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
             app:endIconDrawable="@drawable/ic_close_28"
+            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:errorIconDrawable="@null">
 
@@ -27,9 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="name"
+                android:hint="@string/name"
                 android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/surnameTextInputEditText"
-                android:hint="@string/name" />
+                android:nextFocusDown="@+id/surnameTextInputEditText" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,9 +38,9 @@
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-
             app:endIconDrawable="@drawable/ic_close_28"
+
+            app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:errorIconDrawable="@null">
 
@@ -49,8 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="username"
-                android:nextFocusDown="@+id/phoneTextInputLayout"
                 android:hint="@string/surname"
+                android:nextFocusDown="@+id/phoneTextInputLayout"
                 app:endIconMode="clear_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,19 +60,19 @@
             style="?attr/textInputFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:endIconDrawable="@drawable/ic_close_28"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
-            app:endIconDrawable="@drawable/ic_close_28"
-            app:prefixText="+7 "
-            app:errorIconDrawable="@null">
+            app:errorIconDrawable="@null"
+            app:prefixText="+7 ">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneTextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
-                android:imeOptions="actionDone"
                 android:hint="@string/phone_number"
+                android:imeOptions="actionDone"
                 android:inputType="phone"
                 android:maxLength="13" />
 
@@ -94,10 +94,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:textColor="@color/grey"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/accept_terms"
+        android:textColor="@color/grey"
         app:cornerRadius="8dp" />
 
 

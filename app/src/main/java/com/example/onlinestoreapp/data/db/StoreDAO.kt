@@ -15,18 +15,21 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StoreDAO {
 
-
     @Delete
     suspend fun deleteProduct(product: ProductEntity)
+
     @Query("SELECT * FROM users")
     fun getUser(): Flow<List<UserEntity>>
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun addProduct(product: ProductEntity)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(userEntity: UserEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAllInfo(info:List<InfoEntity>)
+    suspend fun addAllInfo(info: List<InfoEntity>)
+
     @Transaction
     @Query("SELECT * FROM products")
     fun getProducts(): Flow<List<ProductWithInfoEntity>>

@@ -18,6 +18,7 @@ class ImagePagerAdapter @Inject constructor(
     fun setCallback(callback: (Image) -> Unit) {
         this.onClick = callback
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -21,14 +21,14 @@ class StoreDBRepositoryImpl @Inject constructor(
     }
 
     override fun getUser(): Flow<User?> {
-        return  storeDAO.getUser().map {list->
-            if(list.isNotEmpty()){
+        return storeDAO.getUser().map { list ->
+            if (list.isNotEmpty()) {
                 userMapper.fromEntityToUIModel(list.first())
-            }
-            else
+            } else
                 null
         }
     }
+
     override suspend fun addUser(name: String, surname: String, phone: String) {
         storeDAO.addUser(UserEntity(name = name, surname = surname, phone = phone))
     }
@@ -48,8 +48,7 @@ class StoreDBRepositoryImpl @Inject constructor(
     override suspend fun likeProduct(product: ApiProduct) {
         try {
             addProduct(product)
-        }
-        catch (_: Throwable){
+        } catch (_: Throwable) {
             deleteProduct(product)
         }
     }

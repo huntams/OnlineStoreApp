@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroupFilter"
         style="@style/Widget.Material3.ChipGroup"
         android:layout_width="match_parent"
-        app:singleSelection="true"
+        android:layout_height="wrap_content"
         app:singleLine="true"
-        android:layout_height="wrap_content">
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSee"
-            app:chipIcon="@drawable/ic_close_28"
-            app:chipSurfaceColor="@color/grey"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/see_all" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipFace"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/face" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipBody"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/body" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSuntan"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/suntan" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipMask"
-            style="@style/Widget.Material3.Chip.Filter"
+            style="@style/chipFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
             android:text="@string/mask" />
 
     </com.google.android.material.chip.ChipGroup>

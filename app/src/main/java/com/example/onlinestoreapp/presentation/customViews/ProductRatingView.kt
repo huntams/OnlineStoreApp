@@ -26,7 +26,7 @@ class ProductRatingView @JvmOverloads constructor(
 
     fun setRating(rating: Float, count: Int) {
         binding.textViewRating.text = rating.toString()
-        binding.textViewCounter.text = resources.getString(R.string.counter,count)
+        binding.textViewCounter.text = resources.getString(R.string.counter, count)
         setStarIcon(rating)
     }
 

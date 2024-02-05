@@ -9,9 +9,10 @@ import com.example.onlinestoreapp.data.remote.model.ApiInfo
 import com.example.onlinestoreapp.databinding.ItemCharacteristicsBinding
 import javax.inject.Inject
 
-class CharacteristicsAdapter @Inject constructor() : ListAdapter<ApiInfo, CharacteristicsAdapter.ViewHolder>(
-    diffUtilCallback
-) {
+class CharacteristicsAdapter @Inject constructor() :
+    ListAdapter<ApiInfo, CharacteristicsAdapter.ViewHolder>(
+        diffUtilCallback
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =

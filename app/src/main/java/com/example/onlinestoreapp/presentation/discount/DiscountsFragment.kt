@@ -6,5 +6,5 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DiscountsFragment: Fragment(R.layout.fragment_discounts){
+class DiscountsFragment : Fragment(R.layout.fragment_discounts) {
 }

@@ -24,11 +24,11 @@ class WordDeclensionUseCase @Inject constructor(
         resources.getString(R.string.productes)
     )
 
-    operator fun invoke(num: Int,  data: String): String {
+    operator fun invoke(num: Int, data: String): String {
 
         val list: List<String> = if (review.contains(data))
             review
-        else if(product.contains(data))
+        else if (product.contains(data))
             product
         else
             thing

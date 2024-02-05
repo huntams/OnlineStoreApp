@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/textviewDescription"
         android:layout_width="match_parent"
-        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="start"
-        android:text="@string/description" />
+        android:text="@string/description"
+        android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonHide"
-        android:textColor="@color/grey"
         style="@style/Widget.Material3.Button.IconButton"
-        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hide" />
+        android:text="@string/hide"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="@color/grey" />
 
 </LinearLayout>

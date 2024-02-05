@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,13 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include android:id="@+id/imageSlider"
+            <include
+                android:id="@+id/imageSlider"
+                layout="@layout/image_slider"
                 android:layout_width="match_parent"
                 android:layout_height="340dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                layout="@layout/image_slider"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonLiked"
                 style="@style/Widget.Material3.Button.IconButton"
@@ -40,9 +40,9 @@
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:iconTint="@null"
-                app:iconSize="24dp"
                 app:icon="@drawable/ic_info_24"
+                app:iconSize="24dp"
+                app:iconTint="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/imageSlider"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -75,8 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:textColor="@color/grey"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle"
@@ -94,26 +94,28 @@
 
             <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/stars"
+                style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
-                android:progressTint="@color/orange"
                 android:numStars="5"
-                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:progressTint="@color/orange"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
             <TextView
                 android:id="@+id/textviewStars"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="4dp"
-                android:textColor="@color/grey"
+                android:layout_marginTop="8dp"
                 android:gravity="start"
+                android:textColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/stars"
                 app:layout_constraintTop_toBottomOf="@+id/divider"
                 tools:text="@string/text_stars" />
+
             <TextView
                 android:id="@+id/textviewPrice"
                 android:layout_width="wrap_content"
@@ -124,27 +126,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/stars"
                 tools:text="@string/shop" />
+
             <TextView
                 android:id="@+id/textViewOldPrice"
                 android:layout_width="wrap_content"
-                android:textColor="@color/grey"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
                 android:gravity="center"
-                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
                 android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
                 app:layout_constraintStart_toEndOf="@+id/textviewPrice"
-                app:layout_constraintTop_toBottomOf="@+id/stars"/>
+                app:layout_constraintTop_toBottomOf="@+id/stars" />
 
             <include
                 android:id="@+id/cardPrice"
-                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
-                android:layout_marginStart="11dp"
-                android:layout_height="wrap_content"
+                layout="@layout/card_price"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                app:layout_constraintBottom_toTopOf="@id/textviewHeaderDescription"
                 app:layout_constraintStart_toEndOf="@+id/textViewOldPrice"
-                app:layout_constraintTop_toBottomOf="@+id/stars"
-                layout="@layout/card_price"/>
+                app:layout_constraintTop_toBottomOf="@+id/stars" />
+
             <TextView
                 android:id="@+id/textviewHeaderDescription"
                 android:layout_width="0dp"
@@ -225,8 +229,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:iconTint="@null"
                 app:icon="@drawable/ic_copy_24"
+                app:iconTint="@null"
                 app:layout_constraintEnd_toEndOf="parent"
 
                 app:layout_constraintTop_toBottomOf="@+id/recyclerViewCharacteristics" />
@@ -247,8 +251,8 @@
 
 
     <com.example.onlinestoreapp.presentation.customViews.ButtonWithPrice
+        android:id="@+id/buttonPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonPrice"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom" />
 </FrameLayout>

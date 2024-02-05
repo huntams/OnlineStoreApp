@@ -10,7 +10,7 @@ import com.example.onlinestoreapp.data.db.TagsConverter
 @TypeConverters(TagsConverter::class)
 data class ProductEntity(
     @ColumnInfo(name = "product_id")
-    @PrimaryKey val id:String,
+    @PrimaryKey val id: String,
     @ColumnInfo(name = "title")
     val title: String,
     @ColumnInfo(name = "subtitle")
@@ -36,5 +36,5 @@ data class ProductEntity(
     @ColumnInfo(name = "ingredients")
     val ingredients: String,
     @ColumnInfo(name = "like")
-    val like: Boolean=true,
+    val like: Boolean = true,
 )

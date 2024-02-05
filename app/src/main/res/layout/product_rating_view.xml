@@ -11,22 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:src="@drawable/ic_star_16" />
+        android:src="@drawable/ic_star_16"
+        android:contentDescription="@string/text_stars" />
 
     <TextView
         android:id="@+id/textViewRating"
+        style="@style/TextAppearance.Material3.BodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/orange"
-        android:textStyle="normal"
         android:text="@string/shop"
-        style="@style/TextAppearance.Material3.BodySmall"/>
+        android:textColor="@color/orange"
+        android:textStyle="normal" />
+
     <TextView
         android:id="@+id/textViewCounter"
+        style="@style/TextAppearance.Material3.BodySmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:textColor="@color/grey"
         android:text="@string/counter"
-        style="@style/TextAppearance.Material3.BodySmall" />
+        android:textColor="@color/grey" />
 </LinearLayout>

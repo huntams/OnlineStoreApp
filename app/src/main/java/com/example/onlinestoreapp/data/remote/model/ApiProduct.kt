@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ApiProduct(
     @SerialName("id")
-    val id : String,
+    val id: String,
     @SerialName("title")
     val title: String,
     @SerialName("subtitle")
@@ -22,8 +22,8 @@ data class ApiProduct(
     @SerialName("description")
     val description: String,
     @SerialName("info")
-    val info : List<ApiInfo>,
+    val info: List<ApiInfo>,
     @SerialName("ingredients")
     val ingredients: String,
-    var like: Boolean=false,
+    var like: Boolean = false,
 )

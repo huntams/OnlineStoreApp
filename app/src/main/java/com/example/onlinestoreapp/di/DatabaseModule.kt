@@ -31,6 +31,7 @@ object DatabaseModule {
         ).fallbackToDestructiveMigration()
             .build()
     }
+
     @Provides
     @Singleton
     fun provideResources(
@@ -38,6 +39,7 @@ object DatabaseModule {
     ): Resources {
         return context.resources
     }
+
     @Provides
     @Singleton
     fun provideStoreDAO(db: StoreDB): StoreDAO {

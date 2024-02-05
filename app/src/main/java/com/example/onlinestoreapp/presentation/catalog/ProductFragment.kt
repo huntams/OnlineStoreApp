@@ -35,14 +35,17 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
 
     @Inject
     lateinit var imagesUseCase: ImagesUseCase
+
     @Inject
     lateinit var imagePagerAdapter: ImagePagerAdapter
+
     @Inject
     lateinit var characteristicsAdapter: CharacteristicsAdapter
+
     @Inject
     lateinit var viewPagerCallback: ViewPagerCallback
 
-    private lateinit var pageChangeListener : ViewPager2.OnPageChangeCallback
+    private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,17 +56,17 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                 it.setImageResource(
                     R.drawable.ic_page_big_default_10
                 )
-                imageSlider.slideDotLL.addView(it,viewPagerCallback.paramsDots())
+                imageSlider.slideDotLL.addView(it, viewPagerCallback.paramsDots())
             }
             dotsImage[0].setImageResource(R.drawable.ic_page_big_10)
-            pageChangeListener = object : ViewPager2.OnPageChangeCallback(){
+            pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     dotsImage.mapIndexed { index, imageView ->
-                        if (position == index){
+                        if (position == index) {
                             imageView.setImageResource(
                                 R.drawable.ic_page_big_10
                             )
-                        }else{
+                        } else {
                             imageView.setImageResource(R.drawable.ic_page_big_default_10)
                         }
                     }
@@ -92,29 +95,32 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                         )
                     }"
                 )
-                if(data.like){
+                if (data.like) {
                     buttonLiked.setIconResource(R.drawable.ic_heart_active_24)
-                }
-                else
+                } else
                     buttonLiked.setIconResource(R.drawable.ic_heart_default_24)
                 buttonLiked.setOnClickListener {
                     viewModel.likeProduct(data)
                 }
                 textDescription.textviewDescription.text = data.description
                 textViewTitle.text = data.title
-                textViewOldPrice.paintFlags = textViewTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                textViewOldPrice.paintFlags =
+                    textViewTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 textViewSubtitle.text = data.subtitle
                 buttonBrand.text = data.title
-                textviewTotal.text = getString(R.string.available_for_order, data.available,viewModel.wordDeclension(
-                    data.available,
-                    getString( R.string.thing)
-                ))
+                textviewTotal.text = getString(
+                    R.string.available_for_order, data.available, viewModel.wordDeclension(
+                        data.available,
+                        getString(R.string.thing)
+                    )
+                )
                 textComposition.textviewDescription.text = data.ingredients
                 textViewOldPrice.text = "${data.price.price} ${data.price.unit}"
-                textviewPrice.text ="${data.price.priceWithDiscount} ${data.price.unit}"
-                cardPrice.textViewDiscount.text = getString(R.string.discount_procent,data.price.discount)
-                buttonPrice.setPrice("${data.price.price} ${data.price.unit}")
-                buttonPrice.setOldPrice("${data.price.priceWithDiscount} ${data.price.unit}")
+                textviewPrice.text = "${data.price.priceWithDiscount} ${data.price.unit}"
+                cardPrice.textViewDiscount.text =
+                    getString(R.string.discount_procent, data.price.discount)
+                buttonPrice.setPrice("${data.price.priceWithDiscount} ${data.price.unit}")
+                buttonPrice.setOldPrice("${data.price.price} ${data.price.unit}")
                 imagePagerAdapter.submitList(imagesUseCase(data.id))
             }
             textDescription.buttonHide.setOnClickListener {
@@ -134,6 +140,7 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                     R.id.Share -> {
                         true
                     }
+
                     else -> {
                         findNavController().popBackStack()
                     }
@@ -141,10 +148,12 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         binding.imageSlider.viewpager2.unregisterOnPageChangeCallback(pageChangeListener)
     }
+
     private fun hideText(collapsedText: CollapsedTextBinding) {
         if (collapsedText.buttonHide.text == getString(R.string.hide)) {
             collapsedText.buttonHide.text = getString(R.string.more)

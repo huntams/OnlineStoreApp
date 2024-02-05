@@ -7,28 +7,28 @@
     android:orientation="vertical">
 
     <com.example.onlinestoreapp.presentation.customViews.ButtonProfile
-        android:layout_width="match_parent"
         android:id="@+id/buttonProfile"
-        android:layout_marginTop="24dp"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" />
 
     <com.example.onlinestoreapp.presentation.customViews.ButtonProfile
-        android:layout_width="match_parent"
         android:id="@+id/buttonFavourite"
-        android:layout_marginTop="24dp"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp" />
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonShop"
         style="@style/buttonProfile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:textAlignment="textStart"
         android:drawableLeft="@drawable/ic_shops_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="@string/shops"/>
+        android:text="@string/shops"
+        android:textAlignment="textStart" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonQuestions"
@@ -36,10 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="start"
         android:drawableLeft="@drawable/ic_feedback_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="@string/feedback"/>
+        android:gravity="start"
+        android:text="@string/feedback" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonOffer"
@@ -47,10 +47,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="start"
         android:drawableLeft="@drawable/ic_offer_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
-        android:text="@string/offer"/>
+        android:gravity="start"
+        android:text="@string/offer" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonReturn"
@@ -59,9 +59,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_weight="0"
-        android:gravity="start"
         android:drawableLeft="@drawable/ic_refund_24"
         android:drawableRight="@drawable/ic_right_arrow_24"
+        android:gravity="start"
         android:text="@string/purchase_returns" />
 
     <Space
@@ -75,8 +75,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="0"
         android:layout_marginBottom="32dp"
+        android:layout_weight="0"
         android:text="@string/exit"
         app:cornerRadius="8dp" />
 

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.isEmpty
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +24,7 @@ class CatalogAdapter @Inject constructor(
     private val imagesUseCase: ImagesUseCase,
     private val resources: Resources
 ) : ListAdapter<ApiProduct, CatalogAdapter.ViewHolder>(
-    diffUtilCallback
+    AsyncDifferConfig.Builder(diffUtilCallbackCatalog).build()
 ) {
 
     private var onClick: (ApiProduct) -> Unit = {}
@@ -52,8 +54,9 @@ class CatalogAdapter @Inject constructor(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            setMargins(8,0,8,0)
+            setMargins(8, 0, 8, 0)
         }
+
 
         fun bind(item: ApiProduct) {
             with(binding) {
@@ -62,26 +65,28 @@ class CatalogAdapter @Inject constructor(
                 textViewTitle.text = item.title
                 textViewSubtitle.text = item.subtitle
                 val imagePagerAdapter = ImagePagerAdapter()
-                val data =imagesUseCase(item.id)
+                val data = imagesUseCase(item.id)
                 imagePagerAdapter.submitList(data)
                 imageSlider.viewpager2.adapter = imagePagerAdapter
                 val dotsImage = Array(2) { ImageView(binding.root.context) }
-                dotsImage.forEach {
-                    it.setImageResource(
-                        R.drawable.ic_page_small_default_8
-                    )
-                    imageSlider.slideDotLL.addView(it,params)
-                }
+
+                if (imageSlider.slideDotLL.isEmpty())
+                    dotsImage.forEach {
+                        it.setImageResource(
+                            R.drawable.ic_page_small_default_8
+                        )
+                        imageSlider.slideDotLL.addView(it, params)
+                    }
                 dotsImage[0].setImageResource(R.drawable.ic_page_small_8)
 
-                val pageChangeListener = object : ViewPager2.OnPageChangeCallback(){
+                val pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         dotsImage.mapIndexed { index, imageView ->
-                            if (position == index){
+                            if (position == index) {
                                 imageView.setImageResource(
                                     R.drawable.ic_page_small_8
                                 )
-                            }else{
+                            } else {
                                 imageView.setImageResource(R.drawable.ic_page_small_default_8)
                             }
                         }
@@ -89,13 +94,15 @@ class CatalogAdapter @Inject constructor(
                     }
                 }
                 imageSlider.viewpager2.registerOnPageChangeCallback(pageChangeListener)
-                if(item.like)
+                if (item.like)
                     buttonLiked.setIconResource(R.drawable.ic_heart_active_24)
                 else
                     buttonLiked.setIconResource(R.drawable.ic_heart_default_24)
                 stars.setRating(item.feedback.rating, item.feedback.count)
-                cardPrice.textViewDiscount.text = resources.getString(R.string.discount_procent,item.price.discount)
-                textViewPriceWithDiscount.text = "${item.price.priceWithDiscount} ${item.price.unit}"
+                cardPrice.textViewDiscount.text =
+                    resources.getString(R.string.discount_procent, item.price.discount)
+                textViewPriceWithDiscount.text =
+                    "${item.price.priceWithDiscount} ${item.price.unit}"
                 imagePagerAdapter.setCallback {
                     onClick(item)
                 }
@@ -111,7 +118,7 @@ class CatalogAdapter @Inject constructor(
     }
 }
 
-private val diffUtilCallback = object : DiffUtil.ItemCallback<ApiProduct>() {
+private val diffUtilCallbackCatalog = object : DiffUtil.ItemCallback<ApiProduct>() {
 
     override fun areContentsTheSame(oldItem: ApiProduct, newItem: ApiProduct): Boolean {
         return oldItem == newItem

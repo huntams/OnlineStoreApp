@@ -21,15 +21,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FavouriteFragment: Fragment(R.layout.fragment_favourite) {
+class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     @Inject
     lateinit var catalogAdapter: CatalogAdapter
     private val viewModel by viewModels<ProfileViewModel>()
-    val menuHost: MenuHost by lazy { requireActivity() }
+    private val menuHost: MenuHost by lazy { requireActivity() }
     private val binding by viewBinding(FragmentFavouriteBinding::bind)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.productsLiveData.observe(viewLifecycleOwner){
+        viewModel.productsLiveData.observe(viewLifecycleOwner) {
             catalogAdapter.apply {
                 submitList(it)
                 setCallback {

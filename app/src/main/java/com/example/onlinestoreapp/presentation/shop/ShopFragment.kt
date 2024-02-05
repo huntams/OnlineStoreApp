@@ -5,5 +5,5 @@ import com.example.onlinestoreapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShopFragment: Fragment(R.layout.fragment_shop) {
+class ShopFragment : Fragment(R.layout.fragment_shop) {
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class StoreRepositoryImpl @Inject constructor(
     private val storeApiService: StoreApiService,
     private val itemsMapper: ItemsMapper
-) : StoreRepository  {
+) : StoreRepository {
     override suspend fun getCatalog(): Items {
 
 

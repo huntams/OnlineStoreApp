@@ -17,4 +17,7 @@
         <item name="backgroundTint">@color/light_gray</item>
         <item name="cornerRadius">8dp</item>
     </style>
+    <style name="chipFilter" parent="@style/Widget.Material3.Chip.Filter">
+        <item name="checkedIcon">@drawable/ic_close_20</item>
+    </style>
 </resources>

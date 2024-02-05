@@ -47,7 +47,7 @@
     <string name="counter">(%d)</string>
     <string name="discount_procent">-%d%%</string>
     <string name="available_for_order">Доступно для заказа %1$d %2$s</string>
-    <string name="shops">Shops</string>
+    <string name="shops">Магазины</string>
     <string name="feedback">Обратная связь</string>
     <string name="offer">Оферта</string>
     <string name="purchase_returns">Возврат товара</string>
