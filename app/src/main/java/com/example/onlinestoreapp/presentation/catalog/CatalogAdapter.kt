@@ -13,27 +13,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.model.Product
 import com.example.onlinestoreapp.R
-import com.example.onlinestoreapp.data.remote.model.ApiProduct
 import com.example.onlinestoreapp.databinding.ItemCatalogBinding
-import com.example.onlinestoreapp.domain.ImagesUseCase
 import com.example.onlinestoreapp.presentation.ImagePagerAdapter
 import javax.inject.Inject
 
 class CatalogAdapter @Inject constructor(
-    private val imagesUseCase: ImagesUseCase,
     private val resources: Resources
-) : ListAdapter<ApiProduct, CatalogAdapter.ViewHolder>(
+) : ListAdapter<Product, CatalogAdapter.ViewHolder>(
     AsyncDifferConfig.Builder(diffUtilCallbackCatalog).build()
 ) {
 
-    private var onClick: (ApiProduct) -> Unit = {}
-    fun setCallback(callback: (ApiProduct) -> Unit) {
+    private var onClick: (Product) -> Unit = {}
+    fun setCallback(callback: (Product) -> Unit) {
         this.onClick = callback
     }
 
-    private var onClickLike: (ApiProduct) -> Unit = {}
-    fun setLike(callback: (ApiProduct) -> Unit) {
+    private var onClickLike: (Product) -> Unit = {}
+    fun setLike(callback: (Product) -> Unit) {
         this.onClickLike = callback
     }
 
@@ -58,15 +56,14 @@ class CatalogAdapter @Inject constructor(
         }
 
 
-        fun bind(item: ApiProduct) {
+        fun bind(item: Product) {
             with(binding) {
                 textViewPrice.text = "${item.price.price} ${item.price.unit}"
                 textViewPrice.paintFlags = textViewPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 textViewTitle.text = item.title
                 textViewSubtitle.text = item.subtitle
                 val imagePagerAdapter = ImagePagerAdapter()
-                val data = imagesUseCase(item.id)
-                imagePagerAdapter.submitList(data)
+                imagePagerAdapter.submitList(item.images)
                 imageSlider.viewpager2.adapter = imagePagerAdapter
                 val dotsImage = Array(2) { ImageView(binding.root.context) }
 
@@ -118,13 +115,13 @@ class CatalogAdapter @Inject constructor(
     }
 }
 
-private val diffUtilCallbackCatalog = object : DiffUtil.ItemCallback<ApiProduct>() {
+private val diffUtilCallbackCatalog = object : DiffUtil.ItemCallback<Product>() {
 
-    override fun areContentsTheSame(oldItem: ApiProduct, newItem: ApiProduct): Boolean {
+    override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem == newItem
     }
 
-    override fun areItemsTheSame(oldItem: ApiProduct, newItem: ApiProduct): Boolean {
+    override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem.id == newItem.id
     }
 }

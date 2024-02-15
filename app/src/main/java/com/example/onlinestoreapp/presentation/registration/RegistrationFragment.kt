@@ -1,5 +1,6 @@
 package com.example.onlinestoreapp.presentation.registration
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -8,18 +9,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
+import com.example.onlinestoreapp.appComponent
 import com.example.onlinestoreapp.base.PhoneTextWatcher
 import com.example.onlinestoreapp.databinding.FragmentRegistrationBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private val binding by viewBinding(FragmentRegistrationBinding::bind)
     private val viewModel by viewModels<RegistrationViewModel>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {

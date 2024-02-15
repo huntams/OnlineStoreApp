@@ -12,15 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.model.Product
 import com.example.onlinestoreapp.R
-import com.example.onlinestoreapp.data.remote.model.ApiProduct
 import com.example.onlinestoreapp.databinding.FragmentCatalogBinding
 import com.google.android.material.chip.Chip
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
-@AndroidEntryPoint
 class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
 
@@ -74,7 +72,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         }
     }
 
-    private fun showMenu(v: View, @MenuRes menuRes: Int, data: List<ApiProduct>) {
+    private fun showMenu(v: View, @MenuRes menuRes: Int, data: List<Product>) {
         val popup = PopupMenu(requireContext(), v)
         popup.menuInflater.inflate(menuRes, popup.menu)
 

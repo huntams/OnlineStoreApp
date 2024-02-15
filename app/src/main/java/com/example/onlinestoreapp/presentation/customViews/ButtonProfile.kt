@@ -27,16 +27,18 @@ class ButtonProfile @JvmOverloads constructor(
         )
         context.withStyledAttributes(
             attrs,
-            R.styleable.ProfileButton, defStyleAttr, 0
+            R.styleable.ButtonProfile, defStyleAttr, 0
         ) {
             val startImage =
-                getDrawable(R.styleable.ProfileButton_startIconDrawable)?.let { image ->
-                    binding.imageViewStart.setImageDrawable(image)
+                getDrawable(R.styleable.ButtonProfile_startImage)?.let { startImage ->
+                    binding.imageViewStart.setImageDrawable(startImage)
                 }
-            val endImage = getDrawable(R.styleable.ProfileButton_endIconDrawable)?.let { image ->
-                binding.imageViewEnd.setImageDrawable(image)
+            val endImage = getDrawable(R.styleable.ButtonProfile_endImage)?.let { endImage ->
+                binding.imageViewEnd.setImageDrawable(endImage)
             }
+            recycle()
         }
+
     }
 
     fun setCenter(text: String) {

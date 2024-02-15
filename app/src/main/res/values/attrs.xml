@@ -4,9 +4,9 @@
         <attr name="text" format="string"/>
         <attr name="collapsed" format="boolean"/>
     </declare-styleable>
-    <declare-styleable name="ProfileButton">
-        <attr name="startIconDrawable" format="reference"/>
-        <attr name="endIconDrawable" format="reference"/>
+    <declare-styleable name="ButtonProfile">
+        <attr name="startImage" format="reference"/>
+        <attr name="endImage" format="reference"/>
     </declare-styleable>
     <array name="filters">
         <item name="@string/by_popularity"/>
@@ -22,5 +22,10 @@
         <item name="@string/review"/>
         <item name="@string/reviews"/>
         <item name="@string/reviewes"/>
+    </string-array>
+    <string-array name="product">
+        <item name="@string/product"/>
+        <item name="@string/products"/>
+        <item name="@string/productes"/>
     </string-array>
 </resources>

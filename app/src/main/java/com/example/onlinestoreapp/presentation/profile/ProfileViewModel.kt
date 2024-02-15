@@ -4,21 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onlinestoreapp.data.db.StoreDB
-import com.example.onlinestoreapp.data.model.ResultLoader
-import com.example.onlinestoreapp.data.model.User
-import com.example.onlinestoreapp.data.remote.model.ApiProduct
-import com.example.onlinestoreapp.domain.WordDeclensionUseCase
-import com.example.onlinestoreapp.domain.db.DeleteProductDBUseCase
-import com.example.onlinestoreapp.domain.db.GetProductsDBUseCase
-import com.example.onlinestoreapp.domain.db.GetUserDBUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.database.StoreDB
+import com.example.domain.WordDeclensionUseCase
+import com.example.domain.db.DeleteProductDBUseCase
+import com.example.domain.db.GetProductsDBUseCase
+import com.example.domain.db.GetUserDBUseCase
+import com.example.model.Product
+import com.example.model.ResultLoader
+import com.example.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-@HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val db: StoreDB,
     private val getProductsUseCase: GetProductsDBUseCase,
@@ -26,8 +24,8 @@ class ProfileViewModel @Inject constructor(
     private val getUserDBUseCase: GetUserDBUseCase,
     private val wordDeclensionUseCase: WordDeclensionUseCase,
 ) : ViewModel() {
-    private val _productsLiveData = MutableLiveData<List<ApiProduct>>()
-    val productsLiveData: LiveData<List<ApiProduct>> = _productsLiveData
+    private val _productsLiveData = MutableLiveData<List<Product>>()
+    val productsLiveData: LiveData<List<Product>> = _productsLiveData
 
     private val _deleteLiveData = MutableLiveData<ResultLoader<Int>>()
     val deleteLiveData: LiveData<ResultLoader<Int>> = _deleteLiveData
@@ -52,7 +50,7 @@ class ProfileViewModel @Inject constructor(
 
     }
 
-    fun wordDeclension(num: Int, data: String): String {
+    fun wordDeclension(num: Int, data: List<String>): String {
         return wordDeclensionUseCase(num, data)
     }
 
@@ -75,7 +73,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun deleteProduct(product: ApiProduct) {
+    fun deleteProduct(product: Product) {
         viewModelScope.launch {
             deleteProductDBUseCase(product)
         }

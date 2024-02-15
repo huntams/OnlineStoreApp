@@ -19,5 +19,9 @@
     </style>
     <style name="chipFilter" parent="@style/Widget.Material3.Chip.Filter">
         <item name="checkedIcon">@drawable/ic_close_20</item>
+        <item name="checkedIconTint">@color/white</item>
+        <item name="android:textColor">@drawable/chip_text_selector</item>
+        <item name="chipBackgroundColor">@drawable/chip_selector
+        </item>
     </style>
 </resources>

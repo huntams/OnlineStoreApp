@@ -9,12 +9,16 @@
     <com.example.onlinestoreapp.presentation.customViews.ButtonProfile
         android:id="@+id/buttonProfile"
         android:layout_width="match_parent"
+        app:startImage="@drawable/ic_profile_24"
+        app:endImage="@drawable/ic_logout_32"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp" />
 
     <com.example.onlinestoreapp.presentation.customViews.ButtonProfile
         android:id="@+id/buttonFavourite"
         android:layout_width="match_parent"
+        app:startImage="@drawable/ic_heart_default_24"
+        app:endImage="@drawable/ic_right_arrow_24"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp" />
 

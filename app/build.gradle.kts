@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("androidx.navigation.safeargs")
-    id ("com.google.dagger.hilt.android")
     id ("kotlin-parcelize")
     id ("org.jetbrains.kotlin.plugin.serialization")
 }
@@ -44,41 +43,39 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.paging:paging-runtime-ktx:3.2.1")
-    implementation ("io.coil-kt:coil:2.5.0")
-    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
-    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
-    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation(project(":features:catalog"))
+    implementation(project(":features:profile"))
+    implementation(project(":features:registration"))
+
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
+    implementation ("androidx.paging:paging-runtime-ktx:${Versions.paging}")
+    implementation ("androidx.room:room-runtime:${Versions.room}")
+    implementation ("androidx.room:room-ktx:${Versions.room}")
+    implementation ("io.coil-kt:coil:${Versions.coil}")
     implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-    implementation ("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.google.dagger:hilt-android:2.48.1")
-    kapt ("com.google.dagger:hilt-compiler:2.48.1")
-    val lifecycle_version = "2.6.2"
-    //data layer
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
-
-    val room_version = "2.6.1"
-    //Room
-    implementation ("androidx.room:room-runtime:$room_version")
-    annotationProcessor ("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.room:room-ktx:$room_version")
-    kapt ("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.activity:activity-ktx:${Versions.activityKtx}")
+    implementation ("androidx.recyclerview:recyclerview:${Versions.recyclerView}")
+    implementation ("com.google.dagger:dagger:${Versions.dagger}")
+    kapt ("com.google.dagger:dagger-compiler:${Versions.dagger}")
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")
     // LiveData
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}")
     // reflection-free flavor
-    implementation ("com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.8")
-    val nav_version = "2.7.6"
-    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
-    implementation("androidx.core:core-ktx:1.10.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation ("com.github.kirich1409:viewbindingpropertydelegate-noreflection:${Versions.viewBinding}")
+    implementation ("androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}")
+    implementation ("androidx.navigation:navigation-ui-ktx:${Versions.navVersion}")
+    implementation("androidx.core:core-ktx:${Versions.coreKtx}")
+    implementation("androidx.appcompat:appcompat:${Versions.appcompat}")
+    implementation("com.google.android.material:material:${Versions.material}")
+    implementation("androidx.constraintlayout:constraintlayout:${Versions.constraint}")
+    testImplementation("junit:junit:${Versions.junit}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.extJunit}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.espresso}")
 }

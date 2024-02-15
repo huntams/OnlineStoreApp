@@ -11,12 +11,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
+import com.example.onlinestoreapp.appComponent
 import com.example.onlinestoreapp.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
 
@@ -26,7 +25,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent.inject(this)
         setContentView(binding.root)
+        //ViewModelProvider(this).get<MainViewModel>().inject(this)
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
         setSupportActionBar(binding.toolbar)

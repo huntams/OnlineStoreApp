@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onlinestoreapp.data.model.User
-import com.example.onlinestoreapp.domain.db.GetUserDBUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.domain.db.GetUserDBUseCase
+import com.example.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+
+internal class MainViewModel @Inject constructor(
     private val getUserDBUseCase: GetUserDBUseCase
 ) : ViewModel() {
     private val _userLiveData = MutableLiveData<User?>()

@@ -20,21 +20,16 @@ import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.base.ViewPagerCallback
 import com.example.onlinestoreapp.databinding.CollapsedTextBinding
 import com.example.onlinestoreapp.databinding.FragmentProductPageBinding
-import com.example.onlinestoreapp.domain.ImagesUseCase
 import com.example.onlinestoreapp.presentation.ImagePagerAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class ProductFragment : Fragment(R.layout.fragment_product_page) {
 
     private val menuHost: MenuHost by lazy { requireActivity() }
     private val binding by viewBinding(FragmentProductPageBinding::bind)
     private val viewModel by viewModels<CatalogViewModel>()
     private val args: ProductFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var imagesUseCase: ImagesUseCase
 
     @Inject
     lateinit var imagePagerAdapter: ImagePagerAdapter
@@ -78,11 +73,10 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                 val data = it.items.first { product ->
                     product.id == args.productIndex
                 }
-                imagePagerAdapter.submitList(imagesUseCase(data.id))
+                imagePagerAdapter.submitList(data.images)
                 imageSlider.viewpager2.adapter = imagePagerAdapter
                 imageSlider.viewpager2.registerOnPageChangeCallback(pageChangeListener)
                 stars.rating = data.feedback.rating
-                imagePagerAdapter.submitList(imagesUseCase(data.id))
                 characteristicsAdapter.submitList(data.info)
                 recyclerViewCharacteristics.adapter = characteristicsAdapter
                 textviewStars.text = getString(
@@ -91,7 +85,7 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                     "${data.feedback.count} ${
                         viewModel.wordDeclension(
                             data.feedback.count,
-                            getString(R.string.review)
+                            resources.getStringArray(R.array.review).toList()
                         )
                     }"
                 )
@@ -111,7 +105,7 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                 textviewTotal.text = getString(
                     R.string.available_for_order, data.available, viewModel.wordDeclension(
                         data.available,
-                        getString(R.string.thing)
+                        resources.getStringArray(R.array.thing).toList()
                     )
                 )
                 textComposition.textviewDescription.text = data.ingredients
@@ -121,7 +115,6 @@ class ProductFragment : Fragment(R.layout.fragment_product_page) {
                     getString(R.string.discount_procent, data.price.discount)
                 buttonPrice.setPrice("${data.price.priceWithDiscount} ${data.price.unit}")
                 buttonPrice.setOldPrice("${data.price.price} ${data.price.unit}")
-                imagePagerAdapter.submitList(imagesUseCase(data.id))
             }
             textDescription.buttonHide.setOnClickListener {
                 hideText(textDescription)

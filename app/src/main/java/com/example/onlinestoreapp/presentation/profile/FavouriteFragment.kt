@@ -17,10 +17,9 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.databinding.FragmentFavouriteBinding
 import com.example.onlinestoreapp.presentation.catalog.CatalogAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     @Inject
     lateinit var catalogAdapter: CatalogAdapter

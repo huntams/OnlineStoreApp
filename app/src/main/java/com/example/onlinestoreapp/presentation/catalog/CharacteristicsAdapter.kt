@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.onlinestoreapp.data.remote.model.ApiInfo
+import com.example.model.Info
 import com.example.onlinestoreapp.databinding.ItemCharacteristicsBinding
 import javax.inject.Inject
 
 class CharacteristicsAdapter @Inject constructor() :
-    ListAdapter<ApiInfo, CharacteristicsAdapter.ViewHolder>(
+    ListAdapter<Info, CharacteristicsAdapter.ViewHolder>(
         diffUtilCallback
     ) {
 
@@ -27,7 +27,7 @@ class CharacteristicsAdapter @Inject constructor() :
     inner class ViewHolder(
         private val binding: ItemCharacteristicsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ApiInfo) {
+        fun bind(item: Info) {
             with(binding) {
                 textViewName.text = item.title
                 textViewInfo.text = item.value
@@ -36,13 +36,13 @@ class CharacteristicsAdapter @Inject constructor() :
     }
 }
 
-private val diffUtilCallback = object : DiffUtil.ItemCallback<ApiInfo>() {
+private val diffUtilCallback = object : DiffUtil.ItemCallback<Info>() {
 
-    override fun areContentsTheSame(oldItem: ApiInfo, newItem: ApiInfo): Boolean {
+    override fun areContentsTheSame(oldItem: Info, newItem: Info): Boolean {
         return oldItem == newItem
     }
 
-    override fun areItemsTheSame(oldItem: ApiInfo, newItem: ApiInfo): Boolean {
+    override fun areItemsTheSame(oldItem: Info, newItem: Info): Boolean {
         return oldItem.title == newItem.title
     }
 }

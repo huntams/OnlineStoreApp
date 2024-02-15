@@ -1,5 +1,6 @@
 package com.example.onlinestoreapp.presentation.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -7,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.model.ResultLoader
 import com.example.onlinestoreapp.R
-import com.example.onlinestoreapp.data.model.ResultLoader
+import com.example.onlinestoreapp.appComponent
 import com.example.onlinestoreapp.databinding.FragmentProfileBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val binding by viewBinding(FragmentProfileBinding::bind)
@@ -20,6 +21,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getUser()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        context.appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,11 +36,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         viewModel.productsLiveData.observe(viewLifecycleOwner) {
             binding.buttonFavourite.setAllText(
                 getString(R.string.favourite),
-                "${it.size} ${viewModel.wordDeclension(it.size, getString(R.string.product))}"
+                "${it.size} ${viewModel.wordDeclension(it.size, resources.getStringArray(R.array.product).toList())}"
             )
         }
-        binding.buttonFavourite.setStartImage(R.drawable.ic_heart_default_24)
-        binding.buttonFavourite.setEndImage(R.drawable.ic_right_arrow_24)
         binding.buttonFavourite.setOnClickListener {
             findNavController().navigate(ProfileFragmentDirections.actionProfileToFavouriteFragment())
         }
