@@ -5,6 +5,8 @@ plugins {
     id ("androidx.navigation.safeargs")
     id ("kotlin-parcelize")
     id ("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -43,15 +45,20 @@ android {
 }
 
 dependencies {
-    implementation(project(":features:catalog"))
-    implementation(project(":features:profile"))
-    implementation(project(":features:registration"))
 
     implementation(project(":core:domain"))
     implementation(project(":core:data"))
     implementation(project(":core:model"))
+    implementation(project(":core:ui"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
+    implementation(project(":features:catalog"))
+    implementation(project(":features:profile"))
+    implementation(project(":features:favourite"))
+    implementation(project(":features:registration"))
+    implementation(project(":features:product"))
+
+
     implementation ("androidx.paging:paging-runtime-ktx:${Versions.paging}")
     implementation ("androidx.room:room-runtime:${Versions.room}")
     implementation ("androidx.room:room-ktx:${Versions.room}")
@@ -62,6 +69,7 @@ dependencies {
     implementation ("androidx.activity:activity-ktx:${Versions.activityKtx}")
     implementation ("androidx.recyclerview:recyclerview:${Versions.recyclerView}")
     implementation ("com.google.dagger:dagger:${Versions.dagger}")
+    implementation("com.google.firebase:firebase-crashlytics:18.6.2")
     kapt ("com.google.dagger:dagger-compiler:${Versions.dagger}")
     // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}")

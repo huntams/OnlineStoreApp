@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollapsedText">
+        <attr name="text" format="string"/>
+        <attr name="collapsed" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="ButtonProfile">
+        <attr name="startImage" format="reference"/>
+        <attr name="endImage" format="reference"/>
+    </declare-styleable>
+    <array name="filters">
+        <item name="@string/by_popularity"/>
+        <item name="@string/by_price"/>
+        <item name="@string/ascending_price"/>
+    </array>
+    <string-array name="thing">
+        <item name="@string/thing"/>
+        <item name="@string/things"/>
+        <item name="@string/thingses"/>
+    </string-array>
+    <string-array name="review">
+        <item name="@string/review"/>
+        <item name="@string/reviews"/>
+        <item name="@string/reviewes"/>
+    </string-array>
+    <string-array name="product">
+        <item name="@string/product"/>
+        <item name="@string/products"/>
+        <item name="@string/productes"/>
+    </string-array>
+</resources>

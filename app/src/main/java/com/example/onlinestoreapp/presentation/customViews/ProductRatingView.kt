@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.example.onlinestoreapp.R
-import com.example.onlinestoreapp.databinding.ProductRatingViewBinding
+import com.example.ui.databinding.ProductRatingViewBinding
 
 class ProductRatingView @JvmOverloads constructor(
     context: Context,

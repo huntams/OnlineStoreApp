@@ -4,8 +4,13 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textViewData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="bottom|center"
         android:text="@string/home" />
+    <com.example.onlinestoreapp.presentation.home.WheelOfFortuneView
+        android:layout_width="match_parent"
+        android:id="@+id/wheel"
+        android:layout_height="match_parent"/>
 </FrameLayout>

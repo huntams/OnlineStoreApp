@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-internal class MainViewModel @Inject constructor(
-    private val getUserDBUseCase: GetUserDBUseCase
+class MainViewModel @Inject constructor(
+    private val getUserDBUseCase: GetUserDBUseCase,
 ) : ViewModel() {
     private val _userLiveData = MutableLiveData<User?>()
     val userLiveData: LiveData<User?> = _userLiveData

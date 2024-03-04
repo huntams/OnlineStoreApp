@@ -2,7 +2,6 @@ package com.example.onlinestoreapp.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -13,11 +12,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
 import com.example.onlinestoreapp.appComponent
 import com.example.onlinestoreapp.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding by viewBinding(ActivityMainBinding::bind)
-    private val viewModel by viewModels<MainViewModel>()
+    @Inject
+    lateinit var viewModel: MainViewModel
 
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.favouriteFragment -> {
+                com.example.favourite.R.id.nav_favourite -> {
                     binding.toolbar.isTitleCentered = false
                 }
 

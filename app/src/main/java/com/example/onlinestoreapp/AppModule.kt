@@ -1,6 +1,6 @@
 package com.example.onlinestoreapp
 
-import com.example.data.RepositoryModule
+import com.example.data.di.RepositoryModule
 import com.example.database.DatabaseModule
 import com.example.network.remote.NetworkModule
 import dagger.Module

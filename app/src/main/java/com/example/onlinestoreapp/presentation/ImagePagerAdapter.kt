@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.model.Image
-import com.example.onlinestoreapp.databinding.ItemImageBinding
+import com.example.ui.databinding.ItemImageBinding
 import javax.inject.Inject
 
 class ImagePagerAdapter @Inject constructor(

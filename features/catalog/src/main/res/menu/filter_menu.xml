@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Popularity"
+        android:icon="@drawable/ic_share_24"
+        android:title="@string/by_popularity"/>
+    <item
+        android:id="@+id/Price"
+        android:icon="@drawable/ic_share_24"
+        android:title="@string/by_price"/>
+    <item
+        android:id="@+id/Ascending"
+        android:icon="@drawable/ic_share_24"
+        android:title="@string/by_ascending_price"/>
+</menu>

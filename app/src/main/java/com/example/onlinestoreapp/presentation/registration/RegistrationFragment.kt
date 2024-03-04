@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.onlinestoreapp.R
@@ -14,12 +13,14 @@ import com.example.onlinestoreapp.base.PhoneTextWatcher
 import com.example.onlinestoreapp.databinding.FragmentRegistrationBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import javax.inject.Inject
 
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private val binding by viewBinding(FragmentRegistrationBinding::bind)
-    private val viewModel by viewModels<RegistrationViewModel>()
+    @Inject
+    lateinit var viewModel: RegistrationViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

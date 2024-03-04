@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearanceFAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+    </style>
+    <style name="ButtonChanged" parent="Widget.Material3.Button.IconButton">
+        <item name="cornerRadius">8dp</item>
+        <item name="iconGravity">end</item>
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="icon">@drawable/ic_right_arrow_24</item>
+    </style>
+    <style name="buttonProfile" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="backgroundTint">@color/light_gray</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="chipFilter" parent="@style/Widget.Material3.Chip.Filter">
+        <item name="checkedIcon">@drawable/ic_close_20</item>
+        <item name="checkedIconTint">@color/white</item>
+        <item name="android:textColor">@drawable/chip_text_selector</item>
+        <item name="chipBackgroundColor">@drawable/chip_selector
+        </item>
+    </style>
+</resources>
